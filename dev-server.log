@@ -1,0 +1,177 @@
+
+> test@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://127.0.2.2:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 343ms
+GET /users/torvalds/repos?sort=updated&per_page=100 - 401 with id C384:248772:1D921:26FAA:69860E29 in 839ms
+Failed to fetch repos: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/repos.ts:13:26)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async getTopRepos (src/lib/github/repos.ts:80:17)
+    at async HomePage (src/app/page.tsx:15:38)
+  11 |     async () => {
+  12 |       return withRetry(async () => {
+> 13 |         const { data } = await octokit.repos.listForUser({
+     |                          ^
+  14 |           username,
+  15 |           sort: 'updated',
+  16 |           per_page: 100, {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+GET /repos/username/articles-repo/contents/articles - 401 with id 0BA1:7D2A9:1C9B2:26039:69860E29 in 861ms
+Failed to fetch articles: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/articles.ts:28:28)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async getLatestArticles (src/lib/github/articles.ts:138:20)
+    at async HomePage (src/app/page.tsx:15:38)
+  26 |         try {
+  27 |           // Get the contents of the articles directory
+> 28 |           const { data } = await octokit.repos.getContent({
+     |                            ^
+  29 |             owner,
+  30 |             repo,
+  31 |             path: 'articles', {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+ GET / 200 in 2.4s (compile: 1439ms, render: 1002ms)
+ GET /profile.jpg 404 in 187ms (compile: 165ms, render: 23ms)
+GET /users/torvalds/repos?sort=updated&per_page=100 - 401 with id C399:33C0C:3569D:4635A:69860E36 in 788ms
+Failed to fetch repos: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/repos.ts:13:26)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async getTopRepos (src/lib/github/repos.ts:80:17)
+    at async HomePage (src/app/page.tsx:15:38)
+  11 |     async () => {
+  12 |       return withRetry(async () => {
+> 13 |         const { data } = await octokit.repos.listForUser({
+     |                          ^
+  14 |           username,
+  15 |           sort: 'updated',
+  16 |           per_page: 100, {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+GET /repos/username/articles-repo/contents/articles - 401 with id C39A:F7587:1DBA8:273A2:69860E36 in 795ms
+Failed to fetch articles: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/articles.ts:28:28)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async getLatestArticles (src/lib/github/articles.ts:138:20)
+    at async HomePage (src/app/page.tsx:15:38)
+  26 |         try {
+  27 |           // Get the contents of the articles directory
+> 28 |           const { data } = await octokit.repos.getContent({
+     |                            ^
+  29 |             owner,
+  30 |             repo,
+  31 |             path: 'articles', {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+ GET / 200 in 859ms (compile: 5ms, render: 854ms)
+ GET /profile.jpg 404 in 28ms (compile: 2ms, render: 25ms)
+GET /users/torvalds/repos?sort=updated&per_page=100 - 401 with id C3A9:7D2A9:1D145:26A4D:69860E41 in 867ms
+Failed to fetch repos: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/repos.ts:13:26)
+    at async withRetry (src/lib/github/api.ts:104:14)
+  11 |     async () => {
+  12 |       return withRetry(async () => {
+> 13 |         const { data } = await octokit.repos.listForUser({
+     |                          ^
+  14 |           username,
+  15 |           sort: 'updated',
+  16 |           per_page: 100, {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+Failed to fetch repos: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/repos.ts:13:26)
+    at async withRetry (src/lib/github/api.ts:104:14)
+  11 |     async () => {
+  12 |       return withRetry(async () => {
+> 13 |         const { data } = await octokit.repos.listForUser({
+     |                          ^
+  14 |           username,
+  15 |           sort: 'updated',
+  16 |           per_page: 100, {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+ GET /portfolio 200 in 193ms (compile: 7ms, render: 186ms)
+ GET /portfolio 200 in 1205ms (compile: 321ms, render: 884ms)
+GET /repos/username/articles-repo/contents/articles - 401 with id C3AD:1AEB49:1CFA8:26925:69860E43 in 895ms
+Failed to fetch articles: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/articles.ts:28:28)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async ArticlesPage (src/app/articles/page.tsx:14:20)
+  26 |         try {
+  27 |           // Get the contents of the articles directory
+> 28 |           const { data } = await octokit.repos.getContent({
+     |                            ^
+  29 |             owner,
+  30 |             repo,
+  31 |             path: 'articles', {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+ GET /articles 200 in 1081ms (compile: 175ms, render: 906ms)
+GET /repos/username/articles-repo/contents/articles - 401 with id C3B0:1A8C00:1D001:26854:69860E49 in 859ms
+Failed to fetch articles: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/articles.ts:28:28)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async getLatestArticles (src/lib/github/articles.ts:138:20)
+    at async HomePage (src/app/page.tsx:15:38)
+  26 |         try {
+  27 |           // Get the contents of the articles directory
+> 28 |           const { data } = await octokit.repos.getContent({
+     |                            ^
+  29 |             owner,
+  30 |             repo,
+  31 |             path: 'articles', {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+GET /users/torvalds/repos?sort=updated&per_page=100 - 401 with id C3AF:ED675:1C0D3:25901:69860E49 in 867ms
+Failed to fetch repos: Error [HttpError]: Bad credentials - https://docs.github.com/rest
+    at <unknown> (HttpError: Bad credentials - https://docs.github.com/rest)
+    at async (src/lib/github/repos.ts:13:26)
+    at async withRetry (src/lib/github/api.ts:104:14)
+    at async getTopRepos (src/lib/github/repos.ts:80:17)
+    at async HomePage (src/app/page.tsx:15:38)
+  11 |     async () => {
+  12 |       return withRetry(async () => {
+> 13 |         const { data } = await octokit.repos.listForUser({
+     |                          ^
+  14 |           username,
+  15 |           sort: 'updated',
+  16 |           per_page: 100, {
+  status: 401,
+  request: [Object],
+  response: [Object]
+}
+ GET / 200 in 891ms (compile: 4ms, render: 887ms)
+ GET /profile.jpg 404 in 30ms (compile: 4ms, render: 25ms)
+[?25h

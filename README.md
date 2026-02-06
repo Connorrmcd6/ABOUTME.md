@@ -1,36 +1,277 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
 
-## Getting Started
+A modern, auto-updating portfolio website built with Next.js that showcases GitHub repositories and blog articles.
 
-First, run the development server:
+## Features
+
+- 🔄 **Auto-sync with GitHub** - Automatically displays your public repositories and blog articles
+- 📝 **Markdown Blog** - Write articles in markdown, commit to GitHub, and they appear automatically
+- 📊 **Interactive Charts** - Embed bar, line, area, and pie charts directly in your articles
+- 🎨 **Modern UI** - Built with Tailwind CSS and shadcn/ui components
+- ⚡ **Fast & Performant** - ISR (Incremental Static Regeneration) for optimal performance
+- 📱 **Responsive Design** - Works beautifully on all devices
+- 🐳 **Easy Deployment** - Deploy to Vercel or self-host with Docker
+
+## Quick Start
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Set Up Environment Variables
+
+Copy the example environment file and fill in your details:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Edit `.env.local`:
+
+```env
+# GitHub Configuration
+NEXT_PUBLIC_GITHUB_USERNAME=your-github-username
+GITHUB_TOKEN=ghp_your_github_token
+
+# Articles Repository
+ARTICLES_REPO_URL=https://github.com/your-username/your-articles-repo
+
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_NAME=Your Name
+NEXT_PUBLIC_SITE_DESCRIPTION=Portfolio and Blog
+```
+
+#### Getting a GitHub Token
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate new token with `public_repo` scope
+3. Copy the token and add it to `.env.local`
+
+### 3. Create an Articles Repository
+
+Create a new GitHub repository with this structure:
+
+```
+articles/
+├── 2024-01-15-my-first-post/
+│   ├── metadata.json
+│   └── article.md
+└── 2024-02-20-another-post/
+    ├── metadata.json
+    └── article.md
+```
+
+Example `metadata.json`:
+
+```json
+{
+  "title": "My First Blog Post",
+  "summary": "This is a summary of my first blog post.",
+  "date": "2024-01-15",
+  "tags": ["javascript", "web-development"],
+  "author": "Your Name"
+}
+```
+
+Example `article.md`:
+
+```markdown
+# My First Blog Post
+
+This is the content of my blog post written in markdown.
+
+## Code Examples
+
+\`\`\`javascript
+console.log("Hello, World!");
+\`\`\`
+```
+
+### 4. Update Personal Information
+
+Edit these files with your information:
+
+- `src/config/site.ts` - Update social links
+- `src/config/experience.ts` - Add your work experience
+- `src/config/testimonials.ts` - Add testimonials
+- `src/components/home/HeroSection.tsx` - Update bio and profile info
+
+### 5. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Option 1: Vercel (Recommended)
 
-## Learn More
+1. Push your code to GitHub
+2. Import project in Vercel dashboard
+3. Add environment variables
+4. Deploy!
 
-To learn more about Next.js, take a look at the following resources:
+### Option 2: Docker (Self-Hosted)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Build and run with Docker:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Build the image
+docker build -f docker/Dockerfile.pi -t portfolio-site .
 
-## Deploy on Vercel
+# Run the container
+docker run -p 3000:3000 --env-file .env portfolio-site
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Or use Docker Compose:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+cd docker
+docker-compose up -d
+```
+
+With Nginx reverse proxy:
+
+```bash
+cd docker
+docker-compose --profile with-nginx up -d
+```
+
+### Option 3: Raspberry Pi
+
+1. Install Docker on your Raspberry Pi
+2. Clone the repository
+3. Create `.env` file with your configuration
+4. Run with Docker Compose
+
+```bash
+cd docker
+docker-compose up -d
+```
+
+## Project Structure
+
+```
+src/
+├── app/                        # Next.js App Router pages
+│   ├── page.tsx               # Home page
+│   ├── portfolio/             # Portfolio pages
+│   └── articles/              # Blog articles pages
+├── components/                # React components
+│   ├── ui/                    # shadcn/ui components
+│   ├── layout/                # Header, Footer
+│   ├── home/                  # Home page sections
+│   ├── portfolio/             # Portfolio components
+│   └── articles/              # Article components
+├── lib/                       # Utility functions
+│   └── github/                # GitHub API integration
+├── config/                    # Configuration files
+└── types/                     # TypeScript types
+```
+
+## Key Technologies
+
+- **Framework**: Next.js 14+ with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Data Source**: GitHub API
+- **Markdown**: react-markdown with syntax highlighting
+- **Deployment**: Vercel or Docker
+
+## How It Works
+
+### Auto-Update Mechanism
+
+The site uses **Incremental Static Regeneration (ISR)** to automatically update content:
+
+- **Home page**: Revalidates every 5 minutes
+- **Portfolio page**: Revalidates every 10 minutes
+- **Article pages**: Revalidate every 2 hours
+- **Repository pages**: Revalidate every 1 hour
+
+When you push a new article to your GitHub repository or create a new repo, it will automatically appear on your site within the revalidation period.
+
+### Caching Strategy
+
+1. **Memory cache** (5-10 min) for repeated requests within same session
+2. **ISR cache** managed by Next.js for automatic updates
+3. **Graceful fallbacks** - serves stale data if GitHub API is unavailable
+
+## Customization
+
+### Adding Pages
+
+Create new pages in `src/app/`:
+
+```typescript
+// src/app/about/page.tsx
+export default function AboutPage() {
+  return <div>About Me</div>;
+}
+```
+
+### Styling
+
+Customize colors in `src/app/globals.css`:
+
+```css
+@layer base {
+  :root {
+    --primary: 220 90% 56%;
+    /* ... more variables */
+  }
+}
+```
+
+### Components
+
+Add shadcn/ui components:
+
+```bash
+npx shadcn@latest add [component-name]
+```
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NEXT_PUBLIC_GITHUB_USERNAME` | Your GitHub username | Yes |
+| `GITHUB_TOKEN` | GitHub personal access token | Yes |
+| `ARTICLES_REPO_URL` | URL to your articles repository | Yes |
+| `NEXT_PUBLIC_SITE_URL` | Your site URL | Yes |
+| `NEXT_PUBLIC_SITE_NAME` | Your name | Yes |
+| `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description | Yes |
+| `REVALIDATION_TOKEN` | Secret token for manual revalidation API | No |
+
+## Troubleshooting
+
+### GitHub API Rate Limits
+
+- With authentication: 5,000 requests/hour
+- Without: 60 requests/hour
+- The site uses aggressive caching to stay within limits
+
+### Articles Not Showing
+
+1. Check that `ARTICLES_REPO_URL` is correct
+2. Verify repository is public
+3. Ensure `articles/` directory exists
+4. Check `metadata.json` format is valid
+
+### Build Errors
+
+If the build fails due to missing environment variables, create `.env.local` with all required variables.
+
+## License
+
+MIT
+
+## Support
+
+For issues or questions, please open an issue on GitHub.
