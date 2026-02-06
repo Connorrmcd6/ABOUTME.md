@@ -56,7 +56,7 @@ export default async function RepoPage({ params }: RepoPageProps) {
   }
 
   return (
-    <div className="container py-12">
+    <div className="max-w-[740px] mx-auto px-5 md:px-8 py-8">
       {/* Back button */}
       <Button variant="ghost" asChild className="mb-6">
         <Link href="/portfolio">

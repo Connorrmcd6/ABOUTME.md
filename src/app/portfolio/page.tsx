@@ -18,7 +18,7 @@ export default async function PortfolioPage() {
   });
 
   return (
-    <div className="container py-12">
+    <div className="max-w-[740px] mx-auto px-5 md:px-8 py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold tracking-tight mb-2">Portfolio</h1>
         <p className="text-xl text-muted-foreground">

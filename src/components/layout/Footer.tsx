@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { siteConfig } from '@/config/site';
 
 export function Footer() {
@@ -5,13 +6,36 @@ export function Footer() {
 
   return (
     <footer className="border-t py-6 md:py-8">
-      <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="max-w-[740px] mx-auto px-5 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-sm text-muted-foreground">
-          © {currentYear} {siteConfig.name}. All rights reserved.
+          © {currentYear} {siteConfig.name}
         </p>
-        <p className="text-sm text-muted-foreground">
-          Built with Next.js, TypeScript, and Tailwind CSS
-        </p>
+        <div className="flex items-center gap-4 text-sm">
+          <a
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            GitHub
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Resume
+          </a>
+          <a
+            href={siteConfig.links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            LinkedIn
+          </a>
+        </div>
       </div>
     </footer>
   );

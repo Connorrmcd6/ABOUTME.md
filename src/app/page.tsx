@@ -3,7 +3,6 @@ import { ReposPreview } from '@/components/home/ReposPreview';
 import { ArticlesPreview } from '@/components/home/ArticlesPreview';
 import { ExperienceTimeline } from '@/components/home/ExperienceTimeline';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
-import { Separator } from '@/components/ui/separator';
 import { getTopRepos } from '@/lib/github/repos';
 import { getLatestArticles } from '@/lib/github/articles';
 
@@ -24,28 +23,28 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="flex flex-col">
+    <div className="max-w-[740px] mx-auto px-5 md:px-8 py-8">
       <HeroSection />
-      <Separator />
 
       {topRepos.length > 0 && (
-        <>
+        <div className="mt-16">
           <ReposPreview repos={topRepos} />
-          <Separator />
-        </>
+        </div>
       )}
 
       {latestArticles.length > 0 && (
-        <>
+        <div className="mt-16">
           <ArticlesPreview articles={latestArticles} />
-          <Separator />
-        </>
+        </div>
       )}
 
-      <ExperienceTimeline />
-      <Separator />
+      <div className="mt-16">
+        <ExperienceTimeline />
+      </div>
 
-      <TestimonialsSection />
+      <div className="mt-16">
+        <TestimonialsSection />
+      </div>
     </div>
   );
 }

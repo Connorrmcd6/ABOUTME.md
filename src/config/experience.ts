@@ -1,6 +1,7 @@
 export interface ExperienceItem {
   title: string;
   company: string;
+  companyLogo?: string; // Optional: path to company logo (e.g., '/logos/company.png')
   location: string;
   startDate: string;
   endDate: string | null; // null = current position
@@ -12,6 +13,7 @@ export const experience: ExperienceItem[] = [
   {
     title: 'Data Engineer',
     company: 'Nansen.ai',
+    companyLogo: '/logos/nansen.png', // TODO: Add logo to public/logos/
     location: 'City, State',
     startDate: '2022-01',
     endDate: null, // Current position
@@ -25,6 +27,7 @@ export const experience: ExperienceItem[] = [
   {
     title: 'Data Engineer',
     company: 'Luno',
+    companyLogo: '/logos/luno.png', // TODO: Add logo to public/logos/
     location: 'City, State',
     startDate: '2022-08',
     endDate: '2026-01',
@@ -38,6 +41,7 @@ export const experience: ExperienceItem[] = [
   {
     title: 'Software Engineer',
     company: 'OQLIS',
+    companyLogo: '/logos/oqlis.png', // TODO: Add logo to public/logos/
     location: 'City, State',
     startDate: '2020-11',
     endDate: '2022-07',

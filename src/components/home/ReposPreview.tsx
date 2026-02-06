@@ -11,7 +11,7 @@ interface ReposPreviewProps {
 
 export function ReposPreview({ repos }: ReposPreviewProps) {
   return (
-    <section className="container py-12">
+    <section>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Featured Projects</h2>
@@ -27,7 +27,7 @@ export function ReposPreview({ repos }: ReposPreviewProps) {
         </Button>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-3">
         {repos.map((repo) => (
           <Card key={repo.id} className="flex flex-col">
             <CardHeader>

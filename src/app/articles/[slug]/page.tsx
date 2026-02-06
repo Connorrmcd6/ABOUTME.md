@@ -56,8 +56,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   return (
-    <div className="container py-12">
-      <div className="max-w-4xl mx-auto">
+    <div className="max-w-[740px] mx-auto px-5 md:px-8 py-8">
+      <div>
         {/* Back button */}
         <Button variant="ghost" asChild className="mb-6">
           <Link href="/articles">

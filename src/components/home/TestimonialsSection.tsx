@@ -4,7 +4,7 @@ import { testimonials } from '@/config/testimonials';
 
 export function TestimonialsSection() {
   return (
-    <section className="container py-12">
+    <section>
       <div className="mb-8">
         <h2 className="text-3xl font-bold tracking-tight">Testimonials</h2>
         <p className="text-muted-foreground mt-2">
