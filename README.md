@@ -36,9 +36,8 @@ Edit `.env.local`:
 NEXT_PUBLIC_GITHUB_USERNAME=your-github-username
 GITHUB_TOKEN=ghp_your_github_token
 
-# Articles Repository
-GITHUB_OWNER=your-github-username
-GITHUB_REPO=articles
+# Articles Repository (using a placeholder - create your own later)
+ARTICLES_REPO_URL=https://github.com/your-username/articles
 
 # Site Configuration
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
@@ -199,8 +198,7 @@ See `/mdx-reference/index.mdx` for comprehensive examples of all features!
 |----------|-------------|----------|
 | `NEXT_PUBLIC_GITHUB_USERNAME` | Your GitHub username | Yes |
 | `GITHUB_TOKEN` | GitHub personal access token (needs `repo` scope) | Yes |
-| `GITHUB_OWNER` | GitHub username where articles repo is located | Yes |
-| `GITHUB_REPO` | Articles repository name | Yes |
+| `ARTICLES_REPO_URL` | Full URL to your articles repository | Yes |
 | `NEXT_PUBLIC_SITE_URL` | Your site URL | Yes |
 | `NEXT_PUBLIC_SITE_NAME` | Your name | Yes |
 | `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description | Yes |
@@ -382,7 +380,7 @@ src/
 
 ### Articles Not Showing
 
-1. Check that `GITHUB_OWNER` and `GITHUB_REPO` are correct in `.env.local`
+1. Check that `ARTICLES_REPO_URL` is correct in `.env.local` (must be full URL)
 2. Verify the articles repository is **public**
 3. Ensure articles follow the correct structure:
    - Each article in its own folder

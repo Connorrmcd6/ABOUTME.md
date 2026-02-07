@@ -21,8 +21,7 @@ cd docker && docker-compose up -d
 ```bash
 NEXT_PUBLIC_GITHUB_USERNAME=your-username
 GITHUB_TOKEN=ghp_xxxxx
-GITHUB_OWNER=your-username
-GITHUB_REPO=articles
+ARTICLES_REPO_URL=https://github.com/your-username/articles
 NEXT_PUBLIC_SITE_URL=https://yoursite.com
 NEXT_PUBLIC_SITE_NAME=Your Name
 NEXT_PUBLIC_SITE_DESCRIPTION=Your description
