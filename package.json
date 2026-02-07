@@ -1,7 +1,26 @@
 {
-  "name": "test",
-  "version": "0.1.0",
-  "private": true,
+  "name": "aboutme.md",
+  "version": "1.0.0",
+  "description": "An open-source portfolio website template that auto-syncs with GitHub repositories and MDX blog articles",
+  "author": "ABOUTME.md Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Connorrmcd6/aboutme.md.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Connorrmcd6/aboutme.md/issues"
+  },
+  "homepage": "https://github.com/Connorrmcd6/aboutme.md#readme",
+  "keywords": [
+    "portfolio",
+    "nextjs",
+    "mdx",
+    "blog",
+    "template",
+    "github",
+    "personal-website"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -32,6 +51,7 @@
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "tailwind-merge": "^3.4.0",
+    "unist-util-visit": "^5.1.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {

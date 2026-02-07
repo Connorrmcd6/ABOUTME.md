@@ -260,11 +260,48 @@ External links automatically get `target="_blank"` and `rel="noopener noreferrer
 
 ## Images
 
-Images support lazy loading, responsive sizing, and rounded corners:
+Images support lazy loading, responsive sizing, and rounded corners. You can use images from external URLs or store them locally in an `assets` folder.
+
+### External Images
+
+Use any public image URL:
 
 ![Example placeholder image](https://via.placeholder.com/800x400/667eea/ffffff?text=MDX+Reference+Image)
 
-You can also use reference-style images for better readability in your MDX source.
+### Local Images (Recommended)
+
+Store images in an `assets` folder within your article directory:
+
+```
+your-article/
+├── metadata.json
+├── index.mdx
+└── assets/
+    ├── screenshot.png
+    ├── diagram.jpg
+    └── chart.svg
+```
+
+Then reference them with relative paths:
+
+```markdown
+![Screenshot](./assets/screenshot.png)
+![Diagram](assets/diagram.jpg)
+```
+
+<Callout type="success">
+**Local images are automatically transformed** to GitHub raw URLs during compilation. This keeps your images versioned with your article and makes your MDX portable!
+</Callout>
+
+### Reference-Style Images
+
+You can also use reference-style images for better readability in your MDX source:
+
+```markdown
+![Alt text][image-ref]
+
+[image-ref]: ./assets/my-image.png
+```
 
 ---
 
@@ -703,10 +740,24 @@ Images are automatically enhanced with:
 2. **Responsive sizing** - Max width of 100%, height auto-adjusts
 3. **Rounded corners** - Subtle border radius for better aesthetics
 4. **Alt text support** - Always include alt text for accessibility
+5. **Automatic path transformation** - Relative paths (like `./assets/image.png`) are converted to GitHub raw URLs
 
-Example markup:
+### Supported Image Paths
+
 ```markdown
-![Descriptive alt text](https://example.com/image.jpg)
+# External URL
+![Alt text](https://example.com/image.jpg)
+
+# Local image (recommended)
+![Alt text](./assets/image.png)
+
+# Also works without ./
+![Alt text](assets/image.png)
+```
+
+All relative paths are automatically transformed to:
+```
+https://raw.githubusercontent.com/owner/repo/main/article-slug/assets/image.png
 ```
 
 ---

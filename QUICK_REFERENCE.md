@@ -3,6 +3,9 @@
 ## 🚀 Essential Commands
 
 ```bash
+# Setup
+./scripts/setup-articles-repo.sh  # Create articles repository (first time only)
+
 # Development
 npm install              # Install dependencies
 npm run dev             # Start dev server (http://localhost:3000)

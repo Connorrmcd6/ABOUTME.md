@@ -1,6 +1,29 @@
-# Portfolio Website
+# ABOUTME.md
 
-A modern, auto-updating portfolio website built with Next.js that showcases GitHub repositories and blog articles.
+> An open-source, modern portfolio website template built with Next.js that auto-syncs with your GitHub repositories and MDX blog articles.
+
+**Turn your GitHub profile into a stunning portfolio in minutes.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-15+-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue)](https://www.typescriptlang.org/)
+
+[Demo](#) · [Documentation](#documentation) · [Report Bug](../../issues) · [Request Feature](../../issues)
+
+---
+
+## Why ABOUTME.md?
+
+Building a portfolio from scratch is time-consuming. ABOUTME.md gives you a production-ready foundation that:
+
+✨ **Auto-syncs with GitHub** - Your repos appear automatically
+📝 **Powerful MDX blog** - Write with markdown, embed charts, and use LaTeX math
+🎨 **Beautiful by default** - Professional UI with dark mode
+⚡ **Fast & SEO-friendly** - Built on Next.js with ISR
+🔧 **Fully customizable** - Your portfolio, your way
+🚀 **Deploy anywhere** - Vercel, Docker, or your own server
+
+**Perfect for:** Developers, designers, researchers, and anyone who wants a modern portfolio with a blog.
 
 ## Features
 
@@ -13,15 +36,60 @@ A modern, auto-updating portfolio website built with Next.js that showcases GitH
 - 🌙 **Dark Mode** - Automatic theme switching with persistent user preference
 - 🐳 **Easy Deployment** - Deploy to Vercel or self-host with Docker
 
+## Getting Started
+
+**ABOUTME.md** is an open-source portfolio template designed to be forked and customized. There are two ways to engage with this project:
+
+### 🎯 Using ABOUTME.md for Your Portfolio
+
+**This is the primary use case!** Fork this repository to create your own portfolio website.
+
+**License:** MIT - Use it freely for personal or commercial purposes. No attribution required (but appreciated! ⭐).
+
+**What you'll do:**
+1. Fork this repository to your GitHub account
+2. Customize with your information and branding
+3. Create your articles repository
+4. Deploy to your own domain
+5. Write and publish articles
+
+Follow the [Quick Start](#quick-start) guide below for step-by-step instructions.
+
+### 🤝 Contributing to ABOUTME.md
+
+Want to make ABOUTME.md better for everyone? We welcome contributions!
+
+**Perfect for:**
+- Reporting bugs
+- Suggesting features
+- Submitting improvements
+- Adding documentation
+
+See the [Contributing](#contributing) section for detailed guidelines.
+
+---
+
 ## Quick Start
 
-### 1. Install Dependencies
+### 1. Fork & Clone the Repository
+
+**Fork this repository:**
+1. Click the "Fork" button at the top right of this page
+2. This creates your own copy of ABOUTME.md
+
+**Clone your fork:**
+```bash
+git clone https://github.com/YOUR_USERNAME/aboutme.md.git
+cd aboutme.md
+```
+
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Set Up Environment Variables
+### 3. Set Up Environment Variables
 
 Copy the example environment file and fill in your details:
 
@@ -54,15 +122,43 @@ REVALIDATION_TOKEN=your-random-secret-token
 2. Generate new token with `repo` scope (for reading repository contents)
 3. Copy the token and add it to `.env.local`
 
-### 3. Create an Articles Repository
+### 4. Create an Articles Repository
 
-Create a new public GitHub repository (e.g., `articles`) with this structure:
+#### Option A: Automated Setup (Recommended)
+
+Run the setup script to automatically create and configure your articles repository:
+
+```bash
+./scripts/setup-articles-repo.sh
+```
+
+This script will:
+- ✅ Create a new GitHub repository for your articles
+- ✅ Initialize it with a README and `.gitignore`
+- ✅ Copy the MDX reference template as your first article
+- ✅ Push everything to GitHub
+- ✅ Update your `.env.local` automatically
+
+**Requirements:** GitHub CLI (`gh`) must be installed. Install it with:
+```bash
+# macOS
+brew install gh
+
+# Linux/Windows - see https://github.com/cli/cli#installation
+```
+
+#### Option B: Manual Setup
+
+Create a new public GitHub repository (e.g., `articles`) manually with this structure:
 
 ```
 articles/
 ├── my-first-article/
 │   ├── metadata.json
-│   └── index.mdx
+│   ├── index.mdx
+│   └── assets/           # Optional: Store images here
+│       ├── diagram.png
+│       └── screenshot.jpg
 └── another-article/
     ├── metadata.json
     └── index.mdx
@@ -72,6 +168,7 @@ articles/
 - A unique folder name (the article slug)
 - `metadata.json` with article metadata
 - `index.mdx` with article content
+- `assets/` folder (optional) for storing images and other media
 
 Example `metadata.json`:
 
@@ -110,7 +207,7 @@ MDX allows you to use JSX components directly in your markdown!
 </Callout>
 ```
 
-### 4. Reference the MDX Capabilities
+### 5. Reference the MDX Capabilities
 
 Check the `/mdx-reference/` folder in this repository for a **complete example** of:
 - Correct article structure (metadata.json + index.mdx)
@@ -120,7 +217,7 @@ Check the `/mdx-reference/` folder in this repository for a **complete example**
 
 **This folder serves as a template** you can copy to your articles repository!
 
-### 5. Update Personal Information
+### 6. Update Personal Information
 
 Edit these files with your information:
 
@@ -129,13 +226,131 @@ Edit these files with your information:
 - `src/config/testimonials.ts` - Add testimonials
 - `src/components/home/HeroSection.tsx` - Update bio and profile info
 
-### 6. Run Development Server
+### 7. Run Development Server
 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🎨 Customizing Your Portfolio
+
+Once you have the basic setup running, customize it to make it yours! Here's a complete checklist:
+
+### ✅ Essential Customizations
+
+**1. Personal Information** (`src/config/site.ts`)
+```typescript
+export const siteConfig = {
+  links: {
+    github: 'https://github.com/YOUR_USERNAME',      // ← Update
+    linkedin: 'https://linkedin.com/in/YOUR_PROFILE', // ← Update
+    email: 'mailto:your.email@example.com',          // ← Update
+    twitter: 'https://twitter.com/YOUR_HANDLE',      // ← Update or remove
+  },
+};
+```
+
+**2. Work Experience** (`src/config/experience.ts`)
+- Replace example entries with your actual work history
+- Include job titles, companies, dates, and achievements
+- Add relevant technologies for each role
+
+**3. Testimonials** (`src/config/testimonials.ts`)
+- Add testimonials from colleagues or clients
+- Include their name, title, and company
+- Remove or comment out if you don't want this section
+
+**4. Hero Section** (`src/components/home/HeroSection.tsx`)
+- Update your bio (2-3 sentences about what you do)
+- Update your name
+- Change profile image path if needed
+
+**5. Profile Picture** (`public/`)
+- Add your profile picture as `public/profile.jpg` or `public/profile.png`
+- Recommended size: 400x400 pixels
+- Update the path in `HeroSection.tsx` if using different filename
+
+**6. Site Metadata** (`.env.local`)
+```bash
+NEXT_PUBLIC_SITE_NAME=Your Full Name
+NEXT_PUBLIC_SITE_DESCRIPTION=Your professional tagline
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com  # Update when deployed
+```
+
+### 🎯 Optional Customizations
+
+**7. Styling & Colors** (`src/app/globals.css`)
+- Customize theme colors (lines 8-20 for light mode, 40-52 for dark mode)
+- Adjust chart colors (lines 72-76 for light, 106-110 for dark)
+- Modify fonts, spacing, or other design tokens
+
+**8. Home Page Layout** (`src/app/page.tsx`)
+- Reorder sections
+- Remove sections you don't want (Portfolio, Articles, Experience, Testimonials)
+- Add custom sections
+
+**9. Navigation** (`src/components/layout/Header.tsx`)
+- Add or remove nav links
+- Update logo or branding
+- Customize mobile menu
+
+**10. Footer** (`src/components/layout/Footer.tsx`)
+- Update copyright information
+- Add/remove social links
+- Customize footer content
+
+**11. SEO & Meta Tags** (`src/app/layout.tsx`)
+- Update site title and description
+- Add Open Graph image
+- Customize meta tags for social sharing
+
+### 🗑️ Removing Template Content
+
+**Remove example data:**
+```bash
+# Clear example work experience
+# Edit: src/config/experience.ts → export const experience: ExperienceItem[] = [];
+
+# Clear example testimonials
+# Edit: src/config/testimonials.ts → export const testimonials: Testimonial[] = [];
+
+# Remove mdx-reference from your articles repo (after creating your first real article)
+```
+
+**Remove features you don't need:**
+- Don't want a blog? Remove the Articles link from navigation
+- Don't want portfolio section? Remove from home page
+- Don't want testimonials? Remove the section and clear the config
+
+### 🚀 Before Deploying
+
+**Final checklist:**
+- [ ] All personal information updated
+- [ ] Profile picture added
+- [ ] Work experience reflects your history
+- [ ] Social links point to your profiles
+- [ ] At least one article published (or remove Articles section)
+- [ ] Test all pages and links
+- [ ] Verify responsive design on mobile
+- [ ] Check both light and dark modes
+- [ ] Run `npm run build` to check for errors
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to your production URL
+
+### 💡 Pro Tips
+
+**Start Simple:** Don't try to customize everything at once. Get the basics working first, then iterate.
+
+**Use Git:** Commit your changes regularly so you can revert if needed.
+
+**Test Locally:** Always test changes with `npm run dev` before deploying.
+
+**Refer to Examples:** Check `/mdx-reference/` and existing components for patterns to follow.
+
+---
 
 ## Article Structure & MDX Capabilities
 
@@ -184,9 +399,24 @@ Articles support rich MDX formatting:
 - `<Callout type="info|warning|error|success">` - Highlighted callout boxes
 
 **Enhanced Elements:**
-- Images with lazy loading and responsive sizing
-- External links auto-open in new tabs
-- Automatic heading anchors for deep linking
+- **Images:** Lazy loading, responsive sizing, support for local assets
+  - External URLs: `![Alt](https://example.com/image.png)`
+  - Local images: `![Alt](./assets/image.png)` (stored in article's assets folder)
+- **Links:** External links auto-open in new tabs with security attributes
+- **Headings:** Automatic anchor links for deep linking
+
+**Images & Assets:**
+Store images in an `assets/` folder within your article directory:
+```
+article-slug/
+├── metadata.json
+├── index.mdx
+└── assets/
+    └── image.png
+```
+Reference them in your MDX with relative paths: `![Description](./assets/image.png)`
+
+Relative paths are automatically transformed to GitHub raw URLs during compilation.
 
 See `/mdx-reference/index.mdx` for comprehensive examples of all features!
 
@@ -410,10 +640,181 @@ src/
 - **QUICK_REFERENCE.md** - Quick commands and reference card
 - **/mdx-reference/** - Complete MDX capabilities example and template
 
+## Contributing
+
+**ABOUTME.md** is open source and contributions are welcome! Whether you've found a bug, have a feature suggestion, or want to improve the code, your input is valued.
+
+### For Users: Customizing Your Portfolio
+
+If you're using ABOUTME.md for your own portfolio, you **don't need to contribute back**. This is your codebase now! Feel free to:
+
+✅ Customize everything to your needs
+✅ Remove features you don't want
+✅ Add new features for your use case
+✅ Keep your changes private
+
+**Optional:** If you make improvements that might benefit others, consider contributing them back!
+
+### For Contributors: Improving the Template
+
+Want to make this template better for everyone? Here's how:
+
+#### Reporting Issues
+
+Found a bug or have a suggestion? Please [open an issue](../../issues) with:
+
+- **Bug Reports:**
+  - Description of the issue
+  - Steps to reproduce
+  - Expected vs actual behavior
+  - Screenshots if applicable
+  - Environment (OS, Node version, browser)
+
+- **Feature Requests:**
+  - Clear description of the feature
+  - Use cases and benefits
+  - Any implementation ideas
+
+#### Submitting Pull Requests
+
+1. **Fork the repository**
+   ```bash
+   # Click "Fork" on GitHub, then:
+   git clone https://github.com/YOUR_USERNAME/portfolio-template.git
+   cd portfolio-template
+   ```
+
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/your-bug-fix
+   ```
+
+3. **Make your changes**
+   - Follow existing code style
+   - Add comments for complex logic
+   - Update documentation if needed
+   - Test your changes locally
+
+4. **Test thoroughly**
+   ```bash
+   npm run dev      # Test in development
+   npm run build    # Test production build
+   npm run lint     # Check for linting errors
+   ```
+
+5. **Commit with clear messages**
+   ```bash
+   git add .
+   git commit -m "feat: add feature description"
+   # or
+   git commit -m "fix: fix bug description"
+   ```
+
+   Use conventional commits:
+   - `feat:` - New feature
+   - `fix:` - Bug fix
+   - `docs:` - Documentation changes
+   - `style:` - Code style changes (formatting, etc.)
+   - `refactor:` - Code refactoring
+   - `test:` - Adding tests
+   - `chore:` - Maintenance tasks
+
+6. **Push and create PR**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+   Then create a Pull Request on GitHub with:
+   - Clear title and description
+   - Reference any related issues
+   - Screenshots for UI changes
+   - Description of testing done
+
+#### Development Guidelines
+
+**Code Style:**
+- Use TypeScript for type safety
+- Follow existing file structure
+- Use functional components with hooks
+- Keep components small and focused
+- Add JSDoc comments for complex functions
+
+**Commit Guidelines:**
+- Keep commits atomic (one logical change per commit)
+- Write clear commit messages
+- Reference issue numbers when applicable
+
+**Testing:**
+- Test in both light and dark mode
+- Test responsive design (mobile, tablet, desktop)
+- Verify MDX compilation works
+- Check that charts render correctly
+- Test with empty states (no articles, no repos)
+
+**Documentation:**
+- Update README.md for user-facing changes
+- Update QUICK_REFERENCE.md for command changes
+- Update `/mdx-reference/` for MDX feature changes
+- Add code comments for complex logic
+
+#### Areas We'd Love Help With
+
+- 🐛 Bug fixes
+- 📝 Documentation improvements
+- ♿ Accessibility enhancements
+- 🎨 UI/UX improvements
+- 🚀 Performance optimizations
+- 🧪 Adding tests
+- 🌍 Internationalization (i18n)
+- 📱 Mobile experience improvements
+
+#### Questions?
+
+Not sure about something? Feel free to:
+- Open a discussion
+- Ask in your PR
+- Open an issue for clarification
+
+Thank you for considering contributing! 🙏
+
 ## License
 
-MIT
+**ABOUTME.md** is released under the [MIT License](LICENSE).
 
-## Support
+**What this means:**
+- ✅ Use it freely for personal or commercial projects
+- ✅ Modify it however you want
+- ✅ Distribute your modified versions
+- ✅ Private use is allowed
+- ❌ No warranty provided
+- ❌ Liability is limited
 
-For issues or questions, please open an issue on GitHub.
+**Attribution:** Not required, but if you find this useful, a star ⭐ or a mention would be appreciated!
+
+## Support & Community
+
+- 🐛 **Found a bug?** [Open an issue](../../issues)
+- 💡 **Have an idea?** [Request a feature](../../issues)
+- 💬 **Need help?** [Start a discussion](../../discussions)
+- ⭐ **Like this project?** Give it a star on GitHub!
+
+## Acknowledgments
+
+Built with these amazing open-source projects:
+- [Next.js](https://nextjs.org/) - React framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [shadcn/ui](https://ui.shadcn.com/) - UI component library
+- [Recharts](https://recharts.org/) - Chart library
+- [MDX](https://mdxjs.com/) - Markdown for the component era
+- [KaTeX](https://katex.org/) - Math typesetting
+
+---
+
+<div align="center">
+
+**Made with ❤️ by the open source community**
+
+[Documentation](#documentation) · [Contributing](#contributing) · [License](LICENSE)
+
+</div>

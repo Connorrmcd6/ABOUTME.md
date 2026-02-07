@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { notFound } from 'next/navigation';
+import { remarkTransformImages } from '@/lib/remark-transform-images';
 
 /**
  * Parse GitHub repo URL to extract owner and repo name
@@ -25,7 +26,10 @@ function parseRepoUrl(url: string): { owner: string; repo: string } {
 /**
  * Compile MDX content to serialized format
  */
-async function compileMDX(content: string): Promise<MDXRemoteSerializeResult> {
+async function compileMDX(
+  content: string,
+  options: { owner: string; repo: string; slug: string }
+): Promise<MDXRemoteSerializeResult> {
   try {
     // Extract scope variables from export const declarations
     const scope: Record<string, any> = {};
@@ -34,7 +38,11 @@ async function compileMDX(content: string): Promise<MDXRemoteSerializeResult> {
       parseFrontmatter: false, // We handle metadata separately in metadata.json
       scope, // Pass empty scope object
       mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkMath],
+        remarkPlugins: [
+          remarkGfm,
+          remarkMath,
+          [remarkTransformImages, { owner: options.owner, repo: options.repo, slug: options.slug }],
+        ],
         rehypePlugins: [
           rehypeHighlight,
           rehypeSlug,
@@ -169,8 +177,8 @@ export async function getArticle(slug: string): Promise<Article> {
 
         const content = Buffer.from(data.content, 'base64').toString('utf-8');
 
-        // Compile MDX
-        const mdxSource = await compileMDX(content);
+        // Compile MDX with image transformation
+        const mdxSource = await compileMDX(content, { owner, repo, slug });
 
         return {
           slug,
