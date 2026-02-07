@@ -5,7 +5,7 @@ import { ChevronLeft, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
+import { ArticleContent } from '@/components/articles/ArticleContent';
 import { getArticle, getArticles } from '@/lib/github/articles';
 import { format } from 'date-fns';
 
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     return {
       title: article.metadata.title,
       description: article.metadata.summary,
-      authors: article.metadata.author ? [{ name: article.metadata.author }] : undefined,
+      authors: article.metadata.authors.map(author => ({ name: author.name })),
       openGraph: {
         type: 'article',
         title: article.metadata.title,
@@ -78,7 +78,24 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <Calendar className="h-4 w-4" />
                 {format(new Date(article.metadata.date), 'MMMM d, yyyy')}
               </div>
-              {article.metadata.author && <span>• {article.metadata.author}</span>}
+              {article.metadata.authors.length > 0 && (
+                <span>
+                  • By{' '}
+                  {article.metadata.authors.map((author, index) => (
+                    <span key={index}>
+                      <a
+                        href={author.linkedIn}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        {author.name}
+                      </a>
+                      {index < article.metadata.authors.length - 1 && ', '}
+                    </span>
+                  ))}
+                </span>
+              )}
             </div>
 
             {article.metadata.tags.length > 0 && (
@@ -97,9 +114,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <Separator className="mb-8" />
 
           {/* Article content */}
-          <div className="prose-content">
-            <MarkdownRenderer content={article.content} />
-          </div>
+          <ArticleContent mdxSource={article.mdxSource} />
         </article>
 
         <Separator className="my-12" />

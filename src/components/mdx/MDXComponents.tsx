@@ -1,0 +1,89 @@
+'use client';
+
+import type { MDXComponents } from 'mdx/types';
+import dynamic from 'next/dynamic';
+
+// Dynamically import wrapper components to ensure client-side only rendering
+const CustomBarChart = dynamic(() => import('./charts/BarChart').then(mod => ({ default: mod.BarChart })), {
+  ssr: false,
+  loading: () => <div className="h-[300px] flex items-center justify-center">Loading chart...</div>
+});
+
+const CustomLineChart = dynamic(() => import('./charts/LineChart').then(mod => ({ default: mod.LineChart })), {
+  ssr: false,
+  loading: () => <div className="h-[300px] flex items-center justify-center">Loading chart...</div>
+});
+
+const CustomAreaChart = dynamic(() => import('./charts/AreaChart').then(mod => ({ default: mod.AreaChart })), {
+  ssr: false,
+  loading: () => <div className="h-[300px] flex items-center justify-center">Loading chart...</div>
+});
+
+const CustomPieChart = dynamic(() => import('./charts/PieChart').then(mod => ({ default: mod.PieChart })), {
+  ssr: false,
+  loading: () => <div className="h-[300px] flex items-center justify-center">Loading chart...</div>
+});
+
+const Callout = dynamic(() => import('./elements/Callout').then(mod => ({ default: mod.Callout })), {
+  ssr: false
+});
+
+// Dynamically import recharts components
+let Recharts: any = null;
+if (typeof window !== 'undefined') {
+  Recharts = require('recharts');
+}
+
+export function getMDXComponents(): MDXComponents {
+  const components: MDXComponents = {
+    // Custom wrapper components (use these for simple charts)
+    CustomBarChart,
+    CustomLineChart,
+    CustomAreaChart,
+    CustomPieChart,
+    Callout,
+
+    // Override default elements
+    a: (props: any) => {
+      const isExternal = props.href?.startsWith('http');
+      return (
+        <a
+          {...props}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
+        />
+      );
+    },
+
+    img: (props: any) => (
+      <img
+        {...props}
+        className="rounded-lg max-w-full h-auto"
+        loading="lazy"
+      />
+    ),
+  };
+
+  // Add raw recharts components only on client side
+  if (Recharts) {
+    Object.assign(components, {
+      ResponsiveContainer: Recharts.ResponsiveContainer,
+      LineChart: Recharts.LineChart,
+      Line: Recharts.Line,
+      BarChart: Recharts.BarChart,
+      Bar: Recharts.Bar,
+      PieChart: Recharts.PieChart,
+      Pie: Recharts.Pie,
+      Cell: Recharts.Cell,
+      XAxis: Recharts.XAxis,
+      YAxis: Recharts.YAxis,
+      Tooltip: Recharts.Tooltip,
+      Legend: Recharts.Legend,
+      CartesianGrid: Recharts.CartesianGrid,
+      AreaChart: Recharts.AreaChart,
+      Area: Recharts.Area,
+    });
+  }
+
+  return components;
+}

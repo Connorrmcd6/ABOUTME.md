@@ -1,6 +1,14 @@
 import { octokit, cachedRequest, withRetry } from './api';
 import { env } from '@/lib/env';
 import type { Article, ArticleMetadata, ArticlePreview } from '@/types/article';
+import { serialize } from 'next-mdx-remote/serialize';
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /**
  * Parse GitHub repo URL to extract owner and repo name
@@ -11,6 +19,34 @@ function parseRepoUrl(url: string): { owner: string; repo: string } {
     throw new Error(`Invalid GitHub repo URL: ${url}`);
   }
   return { owner: match[1], repo: match[2] };
+}
+
+/**
+ * Compile MDX content to serialized format
+ */
+async function compileMDX(content: string): Promise<MDXRemoteSerializeResult> {
+  try {
+    // Extract scope variables from export const declarations
+    const scope: Record<string, any> = {};
+
+    return await serialize(content, {
+      parseFrontmatter: false, // We handle metadata separately in metadata.json
+      scope, // Pass empty scope object
+      mdxOptions: {
+        remarkPlugins: [remarkGfm, remarkMath],
+        rehypePlugins: [
+          rehypeHighlight,
+          rehypeSlug,
+          [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+          rehypeKatex,
+        ],
+        format: 'mdx',
+      },
+    });
+  } catch (error: any) {
+    console.error('MDX Compilation Error:', error);
+    throw new Error(`Failed to compile MDX: ${error.message || error}`);
+  }
 }
 
 /**
@@ -87,9 +123,15 @@ async function getArticleMetadata(owner: string, repo: string, slug: string): Pr
   const metadata = JSON.parse(content);
 
   // Validate required fields
-  if (!metadata.title || !metadata.summary || !metadata.date || !metadata.tags) {
+  if (!metadata.title || !metadata.summary || !metadata.date || !metadata.tags || !Array.isArray(metadata.authors)) {
     throw new Error(`Invalid metadata structure for ${slug}`);
   }
+
+  // Normalize author field names (handle both 'linkedin' and 'linkedIn')
+  metadata.authors = metadata.authors.map((author: any) => ({
+    name: author.name,
+    linkedIn: author.linkedIn || author.linkedin, // Support both formats
+  }));
 
   return metadata;
 }
@@ -111,7 +153,7 @@ export async function getArticle(slug: string): Promise<Article> {
         const { data } = await octokit.repos.getContent({
           owner,
           repo,
-          path: `${slug}/article.md`,
+          path: `${slug}/index.mdx`,
         });
 
         if (Array.isArray(data) || data.type !== 'file') {
@@ -120,10 +162,14 @@ export async function getArticle(slug: string): Promise<Article> {
 
         const content = Buffer.from(data.content, 'base64').toString('utf-8');
 
+        // Compile MDX
+        const mdxSource = await compileMDX(content);
+
         return {
           slug,
           metadata,
           content,
+          mdxSource,
         };
       });
     },

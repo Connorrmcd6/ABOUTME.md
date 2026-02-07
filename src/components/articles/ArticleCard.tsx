@@ -24,7 +24,19 @@ export function ArticleCard({ article }: ArticleCardProps) {
         <CardDescription className="flex items-center gap-2 text-sm">
           <Calendar className="h-4 w-4" />
           {format(new Date(article.metadata.date), 'MMMM d, yyyy')}
-          {article.metadata.author && ` • ${article.metadata.author}`}
+          {article.metadata.authors[0] && (
+            <>
+              {' • '}
+              <a
+                href={article.metadata.authors[0].linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                {article.metadata.authors[0].name}
+              </a>
+            </>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 flex flex-col justify-between gap-4">
