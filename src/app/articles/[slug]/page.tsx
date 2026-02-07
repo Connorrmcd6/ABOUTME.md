@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { MarkdownRenderer } from '@/components/markdown/MarkdownRenderer';
 import { getArticle, getArticles } from '@/lib/github/articles';
+import { resolveChartIncludes } from '@/lib/markdown/chartIncludes';
 import { format } from 'date-fns';
 
 interface ArticlePageProps {
@@ -48,6 +49,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   let article;
   try {
     article = await getArticle(slug);
+    console.log('[Article Page] Content before resolveChartIncludes:', article.content.substring(0, 500));
+
+    // Resolve any @include directives in chart blocks
+    article.content = await resolveChartIncludes(article.content, slug);
+
+    console.log('[Article Page] Content after resolveChartIncludes:', article.content.substring(0, 500));
   } catch (error: any) {
     if (error.status === 404) {
       notFound();

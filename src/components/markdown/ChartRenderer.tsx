@@ -8,8 +8,17 @@ interface ChartData {
   title?: string;
   description?: string;
   data: any[];
+  // Support both naming conventions
   xAxis?: string;
   yAxis?: string | string[];
+  xKey?: string;
+  yKeys?: string[];
+  // Axis labels
+  xLabel?: string;
+  yLabel?: string;
+  // Formatting
+  yUnit?: string; // e.g., "dollars", "percent"
+  yScale?: 'linear' | 'log'; // Scale type
   colors?: string[];
 }
 
@@ -27,7 +36,20 @@ const DEFAULT_COLORS = [
 ];
 
 export function ChartRenderer({ type, config }: ChartRendererProps) {
-  const { title, description, data, xAxis, yAxis, colors = DEFAULT_COLORS } = config;
+  const {
+    title,
+    description,
+    data,
+    colors = DEFAULT_COLORS,
+    yUnit,
+    yScale = 'linear',
+    xLabel,
+    yLabel,
+  } = config;
+
+  // Normalize field names (support both conventions)
+  const xKey = config.xKey || config.xAxis;
+  const yKeys = config.yKeys || (Array.isArray(config.yAxis) ? config.yAxis : config.yAxis ? [config.yAxis] : []);
 
   if (!data || data.length === 0) {
     return (
@@ -39,94 +61,118 @@ export function ChartRenderer({ type, config }: ChartRendererProps) {
     );
   }
 
+  // Format value based on unit
+  const formatValue = (value: number) => {
+    if (!yUnit) return value.toLocaleString();
+
+    switch (yUnit) {
+      case 'dollars':
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          notation: value >= 1000000 ? 'compact' : 'standard',
+          maximumFractionDigits: 0,
+        }).format(value);
+      case 'percent':
+        return `${value}%`;
+      default:
+        return value.toLocaleString();
+    }
+  };
+
   // Build chart config for shadcn
   const chartConfig: any = {};
-  if (Array.isArray(yAxis)) {
-    yAxis.forEach((key, index) => {
-      chartConfig[key] = {
-        label: key.charAt(0).toUpperCase() + key.slice(1),
-        color: colors[index % colors.length],
-      };
-    });
-  } else if (yAxis) {
-    chartConfig[yAxis] = {
-      label: yAxis.charAt(0).toUpperCase() + yAxis.slice(1),
-      color: colors[0],
+  yKeys.forEach((key, index) => {
+    chartConfig[key] = {
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      color: colors[index % colors.length],
     };
-  }
+  });
 
   const renderChart = () => {
     switch (type) {
       case 'bar':
         return (
-          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
             <BarChart data={data}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              {xAxis && <XAxis dataKey={xAxis} className="text-xs" />}
-              <YAxis className="text-xs" />
-              <ChartTooltip content={<ChartTooltipContent />} />
+              {xKey && <XAxis dataKey={xKey} className="text-xs" label={xLabel ? { value: xLabel, position: 'bottom' } : undefined} />}
+              <YAxis
+                className="text-xs"
+                scale={yScale}
+                tickFormatter={formatValue}
+                label={yLabel ? { value: yLabel, angle: -90, position: 'insideLeft' } : undefined}
+              />
+              <ChartTooltip
+                content={<ChartTooltipContent />}
+                formatter={(value: any) => formatValue(Number(value))}
+              />
               <Legend />
-              {Array.isArray(yAxis) ? (
-                yAxis.map((key, index) => (
-                  <Bar key={key} dataKey={key} fill={colors[index % colors.length]} radius={[4, 4, 0, 0]} />
-                ))
-              ) : yAxis ? (
-                <Bar dataKey={yAxis} fill={colors[0]} radius={[4, 4, 0, 0]} />
-              ) : null}
+              {yKeys.map((key, index) => (
+                <Bar key={key} dataKey={key} fill={colors[index % colors.length]} radius={[4, 4, 0, 0]} />
+              ))}
             </BarChart>
           </ChartContainer>
         );
 
       case 'line':
         return (
-          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              {xAxis && <XAxis dataKey={xAxis} className="text-xs" />}
-              <YAxis className="text-xs" />
-              <ChartTooltip content={<ChartTooltipContent />} />
+              {xKey && <XAxis dataKey={xKey} className="text-xs" label={xLabel ? { value: xLabel, position: 'bottom' } : undefined} />}
+              <YAxis
+                className="text-xs"
+                scale={yScale}
+                tickFormatter={formatValue}
+                label={yLabel ? { value: yLabel, angle: -90, position: 'insideLeft' } : undefined}
+              />
+              <ChartTooltip
+                content={<ChartTooltipContent />}
+                formatter={(value: any) => formatValue(Number(value))}
+              />
               <Legend />
-              {Array.isArray(yAxis) ? (
-                yAxis.map((key, index) => (
-                  <Line
-                    key={key}
-                    type="monotone"
-                    dataKey={key}
-                    stroke={colors[index % colors.length]}
-                    strokeWidth={2}
-                    dot={{ fill: colors[index % colors.length] }}
-                  />
-                ))
-              ) : yAxis ? (
-                <Line type="monotone" dataKey={yAxis} stroke={colors[0]} strokeWidth={2} dot={{ fill: colors[0] }} />
-              ) : null}
+              {yKeys.map((key, index) => (
+                <Line
+                  key={key}
+                  type="monotone"
+                  dataKey={key}
+                  stroke={colors[index % colors.length]}
+                  strokeWidth={2}
+                  dot={{ fill: colors[index % colors.length] }}
+                />
+              ))}
             </LineChart>
           </ChartContainer>
         );
 
       case 'area':
         return (
-          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
             <AreaChart data={data}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              {xAxis && <XAxis dataKey={xAxis} className="text-xs" />}
-              <YAxis className="text-xs" />
-              <ChartTooltip content={<ChartTooltipContent />} />
+              {xKey && <XAxis dataKey={xKey} className="text-xs" label={xLabel ? { value: xLabel, position: 'bottom' } : undefined} />}
+              <YAxis
+                className="text-xs"
+                scale={yScale}
+                tickFormatter={formatValue}
+                label={yLabel ? { value: yLabel, angle: -90, position: 'insideLeft' } : undefined}
+              />
+              <ChartTooltip
+                content={<ChartTooltipContent />}
+                formatter={(value: any) => formatValue(Number(value))}
+              />
               <Legend />
-              {Array.isArray(yAxis) ? (
-                yAxis.map((key, index) => (
-                  <Area
-                    key={key}
-                    type="monotone"
-                    dataKey={key}
-                    stroke={colors[index % colors.length]}
-                    fill={colors[index % colors.length]}
-                    fillOpacity={0.6}
-                  />
-                ))
-              ) : yAxis ? (
-                <Area type="monotone" dataKey={yAxis} stroke={colors[0]} fill={colors[0]} fillOpacity={0.6} />
-              ) : null}
+              {yKeys.map((key, index) => (
+                <Area
+                  key={key}
+                  type="monotone"
+                  dataKey={key}
+                  stroke={colors[index % colors.length]}
+                  fill={colors[index % colors.length]}
+                  fillOpacity={0.6}
+                />
+              ))}
             </AreaChart>
           </ChartContainer>
         );
@@ -134,7 +180,7 @@ export function ChartRenderer({ type, config }: ChartRendererProps) {
       case 'pie':
         // For pie charts, assume data has 'name' and 'value' properties
         return (
-          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+          <ChartContainer config={chartConfig} className="h-[400px] w-full">
             <PieChart>
               <Pie
                 data={data}
@@ -142,14 +188,17 @@ export function ChartRenderer({ type, config }: ChartRendererProps) {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                outerRadius={100}
+                outerRadius={120}
                 label
               >
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                 ))}
               </Pie>
-              <ChartTooltip content={<ChartTooltipContent />} />
+              <ChartTooltip
+                content={<ChartTooltipContent />}
+                formatter={(value: any) => formatValue(Number(value))}
+              />
               <Legend />
             </PieChart>
           </ChartContainer>

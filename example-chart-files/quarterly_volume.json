@@ -1,0 +1,14 @@
+{
+  "type": "bar",
+  "title": "Kalshi Quarterly Volume",
+  "description": "Trading volume by quarter in millions USD",
+  "data": [
+    { "quarter": "Q1 2024", "volume": 15.2 },
+    { "quarter": "Q2 2024", "volume": 28.5 },
+    { "quarter": "Q3 2024", "volume": 45.8 },
+    { "quarter": "Q4 2024", "volume": 62.3 },
+    { "quarter": "Q1 2025", "volume": 95.7 }
+  ],
+  "xAxis": "quarter",
+  "yAxis": "volume"
+}

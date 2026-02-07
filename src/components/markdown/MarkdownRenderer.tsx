@@ -10,15 +10,36 @@ import { ChartRenderer } from './ChartRenderer';
 
 interface MarkdownRendererProps {
   content: string;
+  articleSlug?: string; // Optional: needed for @include directives
 }
 
-export function MarkdownRenderer({ content }: MarkdownRendererProps) {
+/**
+ * Recursively extract text content from rehype-highlighted nodes
+ */
+function extractTextFromNode(node: any): string {
+  if (!node) return '';
+
+  if (typeof node === 'string') return node;
+
+  if (node.type === 'text') return node.value || '';
+
+  if (node.children && Array.isArray(node.children)) {
+    return node.children.map((child: any) => extractTextFromNode(child)).join('');
+  }
+
+  return '';
+}
+
+export function MarkdownRenderer({ content, articleSlug }: MarkdownRendererProps) {
   return (
     <div className="prose prose-slate dark:prose-invert max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[
-          rehypeHighlight,
+          [rehypeHighlight, {
+            ignoreMissing: true,
+            subset: false
+          }],
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: 'wrap' }],
         ]}
@@ -45,37 +66,40 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
               loading="lazy"
             />
           ),
-          // Code block with chart support
-          code: ({ node, className, children, ...props }) => {
-            const match = /language-chart-(bar|line|area|pie)/.exec(className || '');
-            const chartType = match ? match[1] as 'bar' | 'line' | 'area' | 'pie' : null;
-
-            if (chartType) {
-              try {
-                const config = JSON.parse(String(children).trim());
-                return <ChartRenderer type={chartType} config={config} />;
-              } catch (error) {
-                return (
-                  <div className="bg-destructive/10 text-destructive p-4 rounded-lg my-4">
-                    <p className="font-semibold">Chart Error</p>
-                    <p className="text-sm">Failed to parse chart configuration. Check your JSON syntax.</p>
-                  </div>
-                );
-              }
-            }
-
-            return <code className={className} {...props}>{children}</code>;
-          },
-          // Code block wrapper
+          // Code block wrapper - handle charts here
           pre: ({ node, children, ...props }) => {
             // Check if this is a chart code block
             const child = node?.children?.[0];
             if (child && 'tagName' in child && child.tagName === 'code') {
               const codeChild = child as any;
-              const className = codeChild.properties?.className?.[0];
-              if (className?.startsWith('language-chart-')) {
-                // Return children directly (the chart component)
-                return <>{children}</>;
+
+              // Extract text content from all child nodes (handles rehype-highlight's span wrapping)
+              const codeContent = extractTextFromNode(codeChild);
+
+              console.log('[Chart Debug] Processing code block:', {
+                contentLength: codeContent.length,
+                contentPreview: codeContent.substring(0, 100)
+              });
+
+              // Try to parse as JSON and check if it's chart data
+              try {
+                const parsed = JSON.parse(codeContent.trim());
+                console.log('[Chart Debug] Parsed JSON:', {
+                  hasType: !!parsed.type,
+                  type: parsed.type,
+                  hasData: !!parsed.data,
+                  isValidType: ['bar', 'line', 'area', 'pie'].includes(parsed.type)
+                });
+
+                // Check if this JSON has chart structure (type + data fields)
+                if (parsed.type && parsed.data &&
+                    ['bar', 'line', 'area', 'pie'].includes(parsed.type)) {
+
+                  console.log('[Chart Debug] ✅ Rendering chart!');
+                  return <ChartRenderer type={parsed.type} config={parsed} />;
+                }
+              } catch (error) {
+                console.log('[Chart Debug] Not JSON or parse error:', error);
               }
             }
 
