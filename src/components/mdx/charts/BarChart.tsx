@@ -19,7 +19,7 @@ export function BarChart({ title, description, data, xAxis, yAxis }: BarChartPro
   yAxisArray.forEach((key, index) => {
     chartConfig[key] = {
       label: key.charAt(0).toUpperCase() + key.slice(1),
-      color: `hsl(var(--chart-${(index % 5) + 1}))`,
+      color: `var(--chart-${(index % 5) + 1})`,
     };
   });
 
@@ -43,7 +43,7 @@ export function BarChart({ title, description, data, xAxis, yAxis }: BarChartPro
               <Bar
                 key={key}
                 dataKey={key}
-                fill={`hsl(var(--chart-${(index % 5) + 1}))`}
+                fill={`var(--chart-${(index % 5) + 1})`}
                 radius={[4, 4, 0, 0]}
               />
             ))}

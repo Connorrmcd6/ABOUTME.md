@@ -19,7 +19,7 @@ export function LineChart({ title, description, data, xAxis, yAxis }: LineChartP
   yAxisArray.forEach((key, index) => {
     chartConfig[key] = {
       label: key.charAt(0).toUpperCase() + key.slice(1),
-      color: `hsl(var(--chart-${(index % 5) + 1}))`,
+      color: `var(--chart-${(index % 5) + 1})`,
     };
   });
 
@@ -44,7 +44,7 @@ export function LineChart({ title, description, data, xAxis, yAxis }: LineChartP
                 key={key}
                 type="monotone"
                 dataKey={key}
-                stroke={`hsl(var(--chart-${(index % 5) + 1}))`}
+                stroke={`var(--chart-${(index % 5) + 1})`}
                 strokeWidth={2}
                 dot={{ r: 4 }}
               />

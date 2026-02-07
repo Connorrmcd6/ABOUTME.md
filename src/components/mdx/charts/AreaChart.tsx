@@ -19,7 +19,7 @@ export function AreaChart({ title, description, data, xAxis, yAxis }: AreaChartP
   yAxisArray.forEach((key, index) => {
     chartConfig[key] = {
       label: key.charAt(0).toUpperCase() + key.slice(1),
-      color: `hsl(var(--chart-${(index % 5) + 1}))`,
+      color: `var(--chart-${(index % 5) + 1})`,
     };
   });
 
@@ -44,8 +44,8 @@ export function AreaChart({ title, description, data, xAxis, yAxis }: AreaChartP
                 key={key}
                 type="monotone"
                 dataKey={key}
-                stroke={`hsl(var(--chart-${(index % 5) + 1}))`}
-                fill={`hsl(var(--chart-${(index % 5) + 1}))`}
+                stroke={`var(--chart-${(index % 5) + 1})`}
+                fill={`var(--chart-${(index % 5) + 1})`}
                 fillOpacity={0.6}
                 strokeWidth={2}
               />

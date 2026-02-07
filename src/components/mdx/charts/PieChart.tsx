@@ -17,7 +17,7 @@ export function PieChart({ title, description, data, nameKey, dataKey }: PieChar
   data.forEach((item, index) => {
     chartConfig[item[nameKey]] = {
       label: item[nameKey],
-      color: `hsl(var(--chart-${(index % 5) + 1}))`,
+      color: `var(--chart-${(index % 5) + 1})`,
     };
   });
 
@@ -46,7 +46,7 @@ export function PieChart({ title, description, data, nameKey, dataKey }: PieChar
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={`hsl(var(--chart-${(index % 5) + 1}))`}
+                  fill={`var(--chart-${(index % 5) + 1})`}
                 />
               ))}
             </Pie>
