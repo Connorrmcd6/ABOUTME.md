@@ -5,11 +5,12 @@ A modern, auto-updating portfolio website built with Next.js that showcases GitH
 ## Features
 
 - 🔄 **Auto-sync with GitHub** - Automatically displays your public repositories and blog articles
-- 📝 **Markdown Blog** - Write articles in markdown, commit to GitHub, and they appear automatically
+- 📝 **MDX Blog** - Write articles in MDX with rich formatting, math equations, and interactive charts
 - 📊 **Interactive Charts** - Embed bar, line, area, and pie charts directly in your articles
 - 🎨 **Modern UI** - Built with Tailwind CSS and shadcn/ui components
 - ⚡ **Fast & Performant** - ISR (Incremental Static Regeneration) for optimal performance
 - 📱 **Responsive Design** - Works beautifully on all devices
+- 🌙 **Dark Mode** - Automatic theme switching with persistent user preference
 - 🐳 **Easy Deployment** - Deploy to Vercel or self-host with Docker
 
 ## Quick Start
@@ -36,70 +37,100 @@ NEXT_PUBLIC_GITHUB_USERNAME=your-github-username
 GITHUB_TOKEN=ghp_your_github_token
 
 # Articles Repository
-ARTICLES_REPO_URL=https://github.com/your-username/your-articles-repo
+GITHUB_OWNER=your-github-username
+GITHUB_REPO=articles
 
 # Site Configuration
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SITE_NAME=Your Name
 NEXT_PUBLIC_SITE_DESCRIPTION=Portfolio and Blog
+
+# Optional: Revalidation API token
+REVALIDATION_TOKEN=your-random-secret-token
 ```
 
 #### Getting a GitHub Token
 
 1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. Generate new token with `public_repo` scope
+2. Generate new token with `repo` scope (for reading repository contents)
 3. Copy the token and add it to `.env.local`
 
 ### 3. Create an Articles Repository
 
-Create a new GitHub repository with this structure:
+Create a new public GitHub repository (e.g., `articles`) with this structure:
 
 ```
 articles/
-├── 2024-01-15-my-first-post/
+├── my-first-article/
 │   ├── metadata.json
-│   └── article.md
-└── 2024-02-20-another-post/
+│   └── index.mdx
+└── another-article/
     ├── metadata.json
-    └── article.md
+    └── index.mdx
 ```
+
+**Important:** Each article requires:
+- A unique folder name (the article slug)
+- `metadata.json` with article metadata
+- `index.mdx` with article content
 
 Example `metadata.json`:
 
 ```json
 {
   "title": "My First Blog Post",
-  "summary": "This is a summary of my first blog post.",
-  "date": "2024-01-15",
+  "summary": "A comprehensive guide to getting started with this portfolio system.",
+  "date": "2026-02-07",
   "tags": ["javascript", "web-development"],
-  "author": "Your Name"
+  "published": true,
+  "authors": [
+    {
+      "name": "Your Name",
+      "linkedIn": "https://www.linkedin.com/in/your-profile/"
+    }
+  ]
 }
 ```
 
-Example `article.md`:
+Example `index.mdx`:
 
-```markdown
+```mdx
 # My First Blog Post
 
-This is the content of my blog post written in markdown.
+This is the content of my blog post written in **MDX**.
 
-## Code Examples
+## Features
 
-\`\`\`javascript
-console.log("Hello, World!");
-\`\`\`
+- Full markdown support
+- Math equations: $E = mc^2$
+- Interactive charts
+- And much more!
+
+<Callout type="info">
+MDX allows you to use JSX components directly in your markdown!
+</Callout>
 ```
 
-### 4. Update Personal Information
+### 4. Reference the MDX Capabilities
+
+Check the `/mdx-reference/` folder in this repository for a **complete example** of:
+- Correct article structure (metadata.json + index.mdx)
+- All available MDX features (markdown, math, charts, callouts)
+- Chart theming and customization
+- Best practices and examples
+
+**This folder serves as a template** you can copy to your articles repository!
+
+### 5. Update Personal Information
 
 Edit these files with your information:
 
-- `src/config/site.ts` - Update social links
+- `src/config/site.ts` - Update social links (LinkedIn, email, Twitter)
 - `src/config/experience.ts` - Add your work experience
 - `src/config/testimonials.ts` - Add testimonials
 - `src/components/home/HeroSection.tsx` - Update bio and profile info
 
-### 5. Run Development Server
+### 6. Run Development Server
 
 ```bash
 npm run dev
@@ -107,14 +138,94 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Article Structure & MDX Capabilities
+
+### Article Metadata
+
+Your `metadata.json` must follow this structure:
+
+```json
+{
+  "title": "Article Title",
+  "summary": "Brief description for previews and SEO",
+  "date": "YYYY-MM-DD",
+  "tags": ["tag1", "tag2"],
+  "published": true,
+  "authors": [
+    {
+      "name": "Author Name",
+      "linkedIn": "https://www.linkedin.com/in/profile/"
+    }
+  ]
+}
+```
+
+**Important fields:**
+- **`published`**: (Optional) Set to `true` to publish the article. **Defaults to `false`** - articles are drafts until explicitly published.
+- **`authors`**: An array of objects, not a single `author` string. This supports multiple authors per article.
+
+### MDX Features
+
+Articles support rich MDX formatting:
+
+**GitHub Flavored Markdown:**
+- Tables, strikethrough, task lists
+- Code blocks with syntax highlighting
+- Headings with auto-generated anchor links
+
+**Mathematical Equations:**
+- Inline: `$E = mc^2$`
+- Block: `$$\int_{0}^{\infty} e^{-x^2} dx$$`
+
+**Custom Components:**
+- `<CustomBarChart>` - Bar charts
+- `<CustomLineChart>` - Line charts
+- `<CustomAreaChart>` - Area charts
+- `<CustomPieChart>` - Pie charts
+- `<Callout type="info|warning|error|success">` - Highlighted callout boxes
+
+**Enhanced Elements:**
+- Images with lazy loading and responsive sizing
+- External links auto-open in new tabs
+- Automatic heading anchors for deep linking
+
+See `/mdx-reference/index.mdx` for comprehensive examples of all features!
+
+## Configuration
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NEXT_PUBLIC_GITHUB_USERNAME` | Your GitHub username | Yes |
+| `GITHUB_TOKEN` | GitHub personal access token (needs `repo` scope) | Yes |
+| `GITHUB_OWNER` | GitHub username where articles repo is located | Yes |
+| `GITHUB_REPO` | Articles repository name | Yes |
+| `NEXT_PUBLIC_SITE_URL` | Your site URL | Yes |
+| `NEXT_PUBLIC_SITE_NAME` | Your name | Yes |
+| `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description | Yes |
+| `REVALIDATION_TOKEN` | Secret token for manual revalidation API | No |
+
+### Personal Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `src/config/site.ts` | Social media links and site metadata |
+| `src/config/experience.ts` | Work experience timeline |
+| `src/config/testimonials.ts` | Testimonials from colleagues |
+| `src/components/home/HeroSection.tsx` | Hero section with bio |
+| `public/profile.jpg` | Your profile picture (recommended: 400x400px) |
+
 ## Deployment
 
 ### Option 1: Vercel (Recommended)
 
 1. Push your code to GitHub
-2. Import project in Vercel dashboard
-3. Add environment variables
+2. Import project in [Vercel](https://vercel.com) dashboard
+3. Add environment variables in Vercel project settings
 4. Deploy!
+
+Vercel automatically handles ISR and provides optimal performance.
 
 ### Option 2: Docker (Self-Hosted)
 
@@ -154,54 +265,33 @@ cd docker
 docker-compose up -d
 ```
 
-## Project Structure
-
-```
-src/
-├── app/                        # Next.js App Router pages
-│   ├── page.tsx               # Home page
-│   ├── portfolio/             # Portfolio pages
-│   └── articles/              # Blog articles pages
-├── components/                # React components
-│   ├── ui/                    # shadcn/ui components
-│   ├── layout/                # Header, Footer
-│   ├── home/                  # Home page sections
-│   ├── portfolio/             # Portfolio components
-│   └── articles/              # Article components
-├── lib/                       # Utility functions
-│   └── github/                # GitHub API integration
-├── config/                    # Configuration files
-└── types/                     # TypeScript types
-```
-
-## Key Technologies
-
-- **Framework**: Next.js 14+ with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **Data Source**: GitHub API
-- **Markdown**: react-markdown with syntax highlighting
-- **Deployment**: Vercel or Docker
-
 ## How It Works
 
 ### Auto-Update Mechanism
 
 The site uses **Incremental Static Regeneration (ISR)** to automatically update content:
 
-- **Home page**: Revalidates every 5 minutes
+- **Articles list**: Revalidates every 5 minutes
+- **Individual articles**: Revalidate every 5 minutes
 - **Portfolio page**: Revalidates every 10 minutes
-- **Article pages**: Revalidate every 2 hours
 - **Repository pages**: Revalidate every 1 hour
 
-When you push a new article to your GitHub repository or create a new repo, it will automatically appear on your site within the revalidation period.
+When you push a new article to your GitHub repository, it will automatically appear on your site within the revalidation period (up to 5 minutes for new articles).
 
 ### Caching Strategy
 
 1. **Memory cache** (5-10 min) for repeated requests within same session
-2. **ISR cache** managed by Next.js for automatic updates
+2. **ISR cache** managed by Next.js for automatic background updates
 3. **Graceful fallbacks** - serves stale data if GitHub API is unavailable
+
+### MDX Compilation
+
+Articles are fetched from GitHub and compiled server-side with:
+- `next-mdx-remote` - MDX compilation
+- `remark-gfm` - GitHub Flavored Markdown
+- `remark-math` + `rehype-katex` - Math equations
+- `rehype-highlight` - Code syntax highlighting
+- `rehype-slug` + `rehype-autolink-headings` - Heading anchors
 
 ## Customization
 
@@ -216,7 +306,7 @@ export default function AboutPage() {
 }
 ```
 
-### Styling
+### Styling & Colors
 
 Customize colors in `src/app/globals.css`:
 
@@ -224,12 +314,17 @@ Customize colors in `src/app/globals.css`:
 @layer base {
   :root {
     --primary: 220 90% 56%;
+    --chart-1: oklch(0.646 0.222 41.116);
     /* ... more variables */
   }
 }
 ```
 
-### Components
+**Chart theme colors** (5 colors that cycle automatically):
+- Light mode: Lines 72-76
+- Dark mode: Lines 106-110
+
+### Adding UI Components
 
 Add shadcn/ui components:
 
@@ -237,36 +332,85 @@ Add shadcn/ui components:
 npx shadcn@latest add [component-name]
 ```
 
-## Environment Variables
+Browse available components at [ui.shadcn.com](https://ui.shadcn.com).
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NEXT_PUBLIC_GITHUB_USERNAME` | Your GitHub username | Yes |
-| `GITHUB_TOKEN` | GitHub personal access token | Yes |
-| `ARTICLES_REPO_URL` | URL to your articles repository | Yes |
-| `NEXT_PUBLIC_SITE_URL` | Your site URL | Yes |
-| `NEXT_PUBLIC_SITE_NAME` | Your name | Yes |
-| `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description | Yes |
-| `REVALIDATION_TOKEN` | Secret token for manual revalidation API | No |
+## Project Structure
+
+```
+src/
+├── app/                        # Next.js App Router pages
+│   ├── page.tsx               # Home page (ISR: 5 min)
+│   ├── portfolio/             # Portfolio pages (ISR: 10 min)
+│   └── articles/              # Blog articles pages (ISR: 5 min)
+├── components/                # React components
+│   ├── ui/                    # shadcn/ui components
+│   ├── layout/                # Header, Footer
+│   ├── home/                  # Home page sections
+│   ├── portfolio/             # Portfolio components
+│   ├── articles/              # Article components
+│   └── mdx/                   # MDX components (charts, callouts)
+├── lib/                       # Utility functions
+│   └── github/                # GitHub API integration
+├── config/                    # Configuration files
+│   ├── site.ts               # Site metadata and links
+│   ├── experience.ts         # Work experience
+│   └── testimonials.ts       # Testimonials
+└── types/                     # TypeScript types
+```
+
+## Key Technologies
+
+- **Framework**: Next.js 15+ with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS + OKLCH color space
+- **UI Components**: shadcn/ui (Radix UI primitives)
+- **Data Source**: GitHub API (via Octokit)
+- **MDX**: next-mdx-remote with remark/rehype plugins
+- **Charts**: Recharts with custom theme integration
+- **Math**: KaTeX for LaTeX rendering
+- **Code Highlighting**: highlight.js with GitHub Dark theme
+- **Deployment**: Vercel or Docker
 
 ## Troubleshooting
 
 ### GitHub API Rate Limits
 
-- With authentication: 5,000 requests/hour
-- Without: 60 requests/hour
+- **With authentication**: 5,000 requests/hour
+- **Without**: 60 requests/hour
 - The site uses aggressive caching to stay within limits
+- Make sure `GITHUB_TOKEN` is set correctly
 
 ### Articles Not Showing
 
-1. Check that `ARTICLES_REPO_URL` is correct
-2. Verify repository is public
-3. Ensure `articles/` directory exists
-4. Check `metadata.json` format is valid
+1. Check that `GITHUB_OWNER` and `GITHUB_REPO` are correct in `.env.local`
+2. Verify the articles repository is **public**
+3. Ensure articles follow the correct structure:
+   - Each article in its own folder
+   - Contains `metadata.json` and `index.mdx`
+   - `metadata.json` has correct format (especially `authors` array)
+4. Wait up to 5 minutes for ISR cache to update
+5. Check browser console and terminal for error messages
 
 ### Build Errors
 
-If the build fails due to missing environment variables, create `.env.local` with all required variables.
+- Ensure all required environment variables are set in `.env.local`
+- For Vercel: Add all environment variables in project settings
+- For Docker: Create `.env` file with all variables
+- Check that your GitHub token has `repo` scope permissions
+
+### MDX Rendering Issues
+
+- Verify `index.mdx` file has valid MDX syntax
+- Check that custom components are spelled correctly (case-sensitive)
+- Review `/mdx-reference/index.mdx` for working examples
+- Math equations must use proper LaTeX syntax
+- Chart data must be valid JavaScript objects
+
+## Documentation
+
+- **README.md** (this file) - Complete documentation
+- **QUICK_REFERENCE.md** - Quick commands and reference card
+- **/mdx-reference/** - Complete MDX capabilities example and template
 
 ## License
 

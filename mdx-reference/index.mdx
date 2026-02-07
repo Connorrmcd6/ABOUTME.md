@@ -1,0 +1,1064 @@
+# Complete MDX Reference Guide
+
+Welcome to the comprehensive MDX reference for this blog system! This article demonstrates every MDX capability available, from basic markdown formatting to interactive charts and mathematical equations.
+
+## Purpose of This Guide
+
+This reference serves three key purposes:
+
+1. **Documentation** - Complete showcase of all available MDX features
+2. **Template** - Copy-paste examples for your own articles
+3. **Reference** - Demonstrates the correct article structure and metadata format
+
+<Callout type="info">
+This article lives in the main repository as an example. Your articles should be stored in a separate GitHub repository and fetched via the GitHub API.
+</Callout>
+
+---
+
+# Text Formatting
+
+## All Heading Levels
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+<Callout type="success">
+Every heading automatically gets an ID and anchor link thanks to rehype-slug and rehype-autolink-headings. Click any heading to get its URL!
+</Callout>
+
+## Text Styles
+
+You can use **bold text** for emphasis, *italic text* for subtle emphasis, or ***both combined*** for maximum impact.
+
+Need to show corrections? Use ~~strikethrough~~ to indicate removed content.
+
+Inline `code snippets` are perfect for variable names, function calls, or short commands like `npm install`.
+
+You can even combine styles: **bold with `code`**, *italic with ~~strikethrough~~*, and more!
+
+## Blockquotes
+
+Single-line quotes are simple:
+
+> This is a simple blockquote.
+
+Multi-line quotes work great for longer passages:
+
+> This is a longer blockquote that spans multiple lines.
+> It can contain **formatting**, *styles*, and even `code`.
+>
+> You can also include multiple paragraphs within a blockquote.
+
+Nested blockquotes are supported too:
+
+> This is the outer quote.
+> > This is nested inside.
+> > > And this is nested even deeper!
+
+---
+
+# Lists & Organization
+
+## Unordered Lists
+
+Basic list:
+
+- First item
+- Second item
+- Third item
+
+Nested lists:
+
+- Top level item
+  - Nested item 1
+  - Nested item 2
+    - Deeply nested item
+    - Another deep item
+  - Back to second level
+- Back to top level
+
+## Ordered Lists
+
+Simple numbered list:
+
+1. First step
+2. Second step
+3. Third step
+
+Nested ordered lists:
+
+1. Main task
+   1. Subtask A
+   2. Subtask B
+      1. Detail 1
+      2. Detail 2
+2. Second main task
+3. Third main task
+
+## Task Lists
+
+GitHub Flavored Markdown supports interactive task lists:
+
+- [x] Completed task
+- [x] Another completed item
+- [ ] Pending task
+- [ ] Another pending item
+  - [x] Completed subtask
+  - [ ] Pending subtask
+
+---
+
+# Code & Syntax Highlighting
+
+## Inline Code
+
+Use inline code for short snippets: `const greeting = "Hello, World!"` or function names like `calculateTotal()`.
+
+## JavaScript/TypeScript
+
+```javascript
+// React component example
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const increment = () => setCount(prev => prev + 1);
+
+  return (
+    <div className="counter">
+      <h2>Count: {count}</h2>
+      <button onClick={increment}>
+        Increment
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+## Python
+
+```python
+# Data processing example
+import pandas as pd
+import numpy as np
+
+def analyze_data(data):
+    """Analyze dataset and return summary statistics."""
+    df = pd.DataFrame(data)
+
+    summary = {
+        'mean': df.mean(),
+        'median': df.median(),
+        'std_dev': df.std(),
+        'quartiles': df.quantile([0.25, 0.5, 0.75])
+    }
+
+    return summary
+
+# Example usage
+data = {'values': [23, 45, 67, 89, 12, 34, 56, 78]}
+results = analyze_data(data)
+print(results)
+```
+
+## JSON Configuration
+
+```json
+{
+  "name": "my-portfolio",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^15.1.4",
+    "react": "^19.0.0",
+    "recharts": "^2.15.0"
+  }
+}
+```
+
+## Bash Commands
+
+```bash
+# Setup commands
+git clone https://github.com/username/articles.git
+cd articles
+
+# Create new article
+mkdir my-new-article
+cd my-new-article
+
+# Create required files
+touch metadata.json index.mdx
+
+# Push to GitHub
+git add .
+git commit -m "Add new article"
+git push origin main
+```
+
+---
+
+# Tables
+
+## Basic Table
+
+| Component | Type | Description |
+|-----------|------|-------------|
+| BarChart | Chart | Display categorical data with bars |
+| LineChart | Chart | Show trends over time with lines |
+| AreaChart | Chart | Display cumulative data with filled areas |
+| PieChart | Chart | Show proportions of a whole |
+
+## Table with Alignment
+
+| Left Aligned | Center Aligned | Right Aligned |
+|:-------------|:--------------:|--------------:|
+| Text | Text | Text |
+| More text | More text | More text |
+| Even more | Even more | Even more |
+
+## Complex Table with Formatting
+
+| Feature | Status | Code Example |
+|---------|--------|--------------|
+| **Math Support** | ✅ Enabled | `$E = mc^2$` |
+| **GFM Tables** | ✅ Enabled | See above |
+| **Code Highlighting** | ✅ Enabled | ` ```js ` |
+| **Custom Components** | ✅ Enabled | `<Callout>` |
+| ~~Deprecated Feature~~ | ❌ Removed | N/A |
+
+---
+
+# Links & Images
+
+## Link Types
+
+Regular text link: [Visit the GitHub repository](https://github.com/Connorrmcd6/articles)
+
+External links automatically open in a new tab with security attributes: [MDX Documentation](https://mdxjs.com/)
+
+Reference-style links work too. Check out [Next.js][nextjs] and [React][react] documentation.
+
+[nextjs]: https://nextjs.org/
+[react]: https://react.dev/
+
+<Callout type="info">
+External links automatically get `target="_blank"` and `rel="noopener noreferrer"` attributes for security and UX.
+</Callout>
+
+## Images
+
+Images support lazy loading, responsive sizing, and rounded corners:
+
+![Example placeholder image](https://via.placeholder.com/800x400/667eea/ffffff?text=MDX+Reference+Image)
+
+You can also use reference-style images for better readability in your MDX source.
+
+---
+
+# Mathematical Equations
+
+Mathematics is powered by KaTeX and supports both inline and block equations.
+
+## Inline Math
+
+Simple inline equations work great: $E = mc^2$ is Einstein's famous equation.
+
+The quadratic formula $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ solves polynomial equations.
+
+Inline math works seamlessly with text: The area of a circle is $A = \pi r^2$ where $r$ is the radius.
+
+## Block Equations
+
+### Physics & Mathematics
+
+The Gaussian integral:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+Maxwell's equations in differential form:
+
+$$
+\begin{aligned}
+\nabla \cdot \mathbf{E} &= \frac{\rho}{\epsilon_0} \\
+\nabla \cdot \mathbf{B} &= 0 \\
+\nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+\nabla \times \mathbf{B} &= \mu_0\mathbf{J} + \mu_0\epsilon_0\frac{\partial \mathbf{E}}{\partial t}
+\end{aligned}
+$$
+
+### Linear Algebra
+
+Matrix multiplication:
+
+$$
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+=
+\begin{bmatrix}
+ax + by \\
+cx + dy
+\end{bmatrix}
+$$
+
+### Statistics
+
+Sample mean and standard deviation:
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+$$
+
+$$
+s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$
+
+### Computer Science
+
+Big-O notation for algorithm complexity:
+
+$$
+T(n) = O(n \log n)
+$$
+
+Recurrence relation for merge sort:
+
+$$
+T(n) = 2T\left(\frac{n}{2}\right) + O(n)
+$$
+
+### Finance
+
+Compound interest formula:
+
+$$
+A = P\left(1 + \frac{r}{n}\right)^{nt}
+$$
+
+Where $A$ is final amount, $P$ is principal, $r$ is annual rate, $n$ is compounds per year, and $t$ is time in years.
+
+---
+
+# Callout Components
+
+Callouts highlight important information with color-coded styling.
+
+## Info Callout
+
+<Callout type="info">
+This is an informational callout. Use it for helpful tips, additional context, or related information that enhances understanding.
+</Callout>
+
+## Warning Callout
+
+<Callout type="warning">
+This is a warning callout. Use it to highlight potential issues, gotchas, or things users should be aware of before proceeding.
+</Callout>
+
+## Error Callout
+
+<Callout type="error">
+This is an error callout. Use it for critical information, breaking changes, or things that will cause problems if not addressed.
+</Callout>
+
+## Success Callout
+
+<Callout type="success">
+This is a success callout. Use it for best practices, recommended approaches, or positive outcomes.
+</Callout>
+
+## Callouts with Rich Content
+
+Callouts can contain formatted text, lists, and code:
+
+<Callout type="info">
+
+### Setup Steps
+
+Follow these steps to get started:
+
+1. Clone the articles repository
+2. Create a new folder for your article
+3. Add `metadata.json` and `index.mdx`
+4. Use code examples: `git commit -m "Add article"`
+
+**Remember:** Article folders must contain both files!
+
+</Callout>
+
+---
+
+# Interactive Charts
+
+All charts support automatic color theming, light/dark mode, and responsive sizing.
+
+## Bar Charts
+
+### Single Series Bar Chart
+
+<CustomBarChart
+  title="Monthly Sales by Category"
+  description="Product category performance for Q1 2026"
+  data={[
+    { category: "Software", sales: 45000 },
+    { category: "Hardware", sales: 38000 },
+    { category: "Services", sales: 29000 },
+    { category: "Support", sales: 18000 },
+    { category: "Training", sales: 12000 }
+  ]}
+  xAxis="category"
+  yAxis="sales"
+/>
+
+### Multi-Series Bar Chart
+
+<CustomBarChart
+  title="Quarterly Performance Comparison"
+  description="Q1 vs Q2 2026 revenue by product category"
+  data={[
+    { category: "Software", q1: 45000, q2: 52000 },
+    { category: "Hardware", q1: 38000, q2: 41000 },
+    { category: "Services", q1: 29000, q2: 35000 },
+    { category: "Support", q1: 18000, q2: 22000 },
+    { category: "Training", q1: 12000, q2: 15000 }
+  ]}
+  xAxis="category"
+  yAxis={["q1", "q2"]}
+/>
+
+## Line Charts
+
+### Single Series Line Chart
+
+<CustomLineChart
+  title="Daily Website Visitors"
+  description="Traffic over one week in January 2026"
+  data={[
+    { day: "Mon", visitors: 1250 },
+    { day: "Tue", visitors: 1580 },
+    { day: "Wed", visitors: 1720 },
+    { day: "Thu", visitors: 1890 },
+    { day: "Fri", visitors: 2100 },
+    { day: "Sat", visitors: 1650 },
+    { day: "Sun", visitors: 1420 }
+  ]}
+  xAxis="day"
+  yAxis="visitors"
+/>
+
+### Multi-Series Line Chart
+
+<CustomLineChart
+  title="Revenue vs Expenses Trend"
+  description="Monthly financial performance Q1 2026"
+  data={[
+    { month: "Jan", revenue: 85000, expenses: 62000 },
+    { month: "Feb", revenue: 92000, expenses: 65000 },
+    { month: "Mar", revenue: 88000, expenses: 63000 },
+    { month: "Apr", revenue: 95000, expenses: 67000 },
+    { month: "May", revenue: 102000, expenses: 70000 },
+    { month: "Jun", revenue: 108000, expenses: 72000 }
+  ]}
+  xAxis="month"
+  yAxis={["revenue", "expenses"]}
+/>
+
+## Area Charts
+
+### Single Series Area Chart
+
+<CustomAreaChart
+  title="Cumulative User Growth"
+  description="Total registered users over time"
+  data={[
+    { quarter: "Q1 2025", users: 12500 },
+    { quarter: "Q2 2025", users: 15800 },
+    { quarter: "Q3 2025", users: 19200 },
+    { quarter: "Q4 2025", users: 23400 },
+    { quarter: "Q1 2026", users: 28900 }
+  ]}
+  xAxis="quarter"
+  yAxis="users"
+/>
+
+### Multi-Series Area Chart
+
+<CustomAreaChart
+  title="Traffic Sources Over Time"
+  description="Breakdown of visitor sources Q1 2026"
+  data={[
+    { month: "Jan", organic: 5200, direct: 3100, social: 1800 },
+    { month: "Feb", organic: 5800, direct: 3400, social: 2100 },
+    { month: "Mar", organic: 6300, direct: 3600, social: 2400 },
+    { month: "Apr", organic: 7100, direct: 3900, social: 2800 },
+    { month: "May", organic: 7800, direct: 4200, social: 3200 },
+    { month: "Jun", organic: 8500, direct: 4500, social: 3600 }
+  ]}
+  xAxis="month"
+  yAxis={["organic", "direct", "social"]}
+/>
+
+## Pie Chart
+
+<CustomPieChart
+  title="Market Share Distribution"
+  description="Product revenue breakdown for 2025"
+  data={[
+    { name: "Product A", value: 450000 },
+    { name: "Product B", value: 320000 },
+    { name: "Product C", value: 180000 },
+    { name: "Product D", value: 150000 },
+    { name: "Product E", value: 100000 }
+  ]}
+  nameKey="name"
+  dataKey="value"
+/>
+
+## Chart with Color Cycling
+
+This chart demonstrates automatic color cycling with 6+ data series. Notice how colors cycle through the 5 theme colors and then repeat:
+
+<CustomBarChart
+  title="Color Cycling Demonstration"
+  description="Six data series showing automatic color assignment"
+  data={[
+    { category: "Item 1", series1: 100, series2: 120, series3: 80, series4: 150, series5: 110, series6: 90 },
+    { category: "Item 2", series1: 130, series2: 90, series3: 140, series4: 100, series5: 120, series6: 110 },
+    { category: "Item 3", series1: 110, series2: 140, series3: 95, series4: 130, series5: 100, series6: 125 }
+  ]}
+  xAxis="category"
+  yAxis={["series1", "series2", "series3", "series4", "series5", "series6"]}
+/>
+
+<Callout type="info">
+Colors cycle using modulo operation: `(index % 5) + 1`. Series 6 reuses chart-1's color, series 7 would use chart-2's color, and so on.
+</Callout>
+
+---
+
+# Chart Theming & Customization
+
+## Theme Color Reference
+
+This blog uses 5 chart theme colors that automatically adapt to light and dark modes. Colors are defined using the OKLCH color space for perceptually uniform brightness.
+
+### Light Mode Colors
+
+```css
+--chart-1: oklch(0.646 0.222 41.116)   /* Warm orange */
+--chart-2: oklch(0.6 0.118 184.704)     /* Cool cyan */
+--chart-3: oklch(0.398 0.07 227.392)    /* Deep blue */
+--chart-4: oklch(0.828 0.189 84.429)    /* Bright yellow */
+--chart-5: oklch(0.769 0.188 70.08)     /* Light orange */
+```
+
+### Dark Mode Colors
+
+```css
+--chart-1: oklch(0.488 0.243 264.376)   /* Purple */
+--chart-2: oklch(0.696 0.17 162.48)     /* Teal/green */
+--chart-3: oklch(0.769 0.188 70.08)     /* Orange */
+--chart-4: oklch(0.627 0.265 303.9)     /* Magenta */
+--chart-5: oklch(0.645 0.246 16.439)    /* Red-orange */
+```
+
+<Callout type="success">
+The OKLCH color space ensures colors have consistent perceived brightness across light and dark themes, providing better visual harmony.
+</Callout>
+
+## How Color Assignment Works
+
+Charts automatically assign colors from the theme palette:
+
+1. **First data series** → `--chart-1`
+2. **Second data series** → `--chart-2`
+3. **Third data series** → `--chart-3`
+4. **Fourth data series** → `--chart-4`
+5. **Fifth data series** → `--chart-5`
+6. **Sixth data series** → `--chart-1` (cycle repeats)
+
+The assignment uses this formula: `(index % 5) + 1`
+
+This means you can have unlimited data series, and colors will automatically cycle through the 5 theme colors in a predictable pattern.
+
+## Customizing Chart Colors
+
+You can customize chart colors globally by modifying the CSS variables:
+
+**Location:** `/src/app/globals.css`
+
+**Light mode colors:** Lines 72-76
+
+```css
+@layer base {
+  :root {
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+  }
+}
+```
+
+**Dark mode colors:** Lines 106-110
+
+```css
+@layer base {
+  .dark {
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+  }
+}
+```
+
+## Chart Component Implementation
+
+The color assignment happens in each chart component's `chartConfig` object. Here's how it works in the Bar Chart:
+
+**File:** `/src/components/mdx/charts/BarChart.tsx`
+
+```typescript
+const chartConfig = yAxisKeys.reduce((config, key, index) => {
+  const colorIndex = (index % 5) + 1;
+  config[key] = {
+    label: key,
+    color: `hsl(var(--chart-${colorIndex}))`,
+  };
+  return config;
+}, {} as ChartConfig);
+```
+
+This pattern is consistent across all chart components (Line, Area, Bar, Pie).
+
+<Callout type="info">
+All charts automatically switch between light and dark theme colors when the user toggles dark mode. No additional configuration needed!
+</Callout>
+
+---
+
+# Advanced Features
+
+## Horizontal Rules
+
+Use three or more hyphens to create horizontal dividers:
+
+---
+
+Simple as that!
+
+---
+
+## Automatic Heading Anchors
+
+Every heading in this article has an automatically generated ID based on its text content. This is powered by `rehype-slug`.
+
+Additionally, headings are automatically linked with `rehype-autolink-headings`, so you can:
+
+1. Click any heading to get its anchor URL
+2. Share direct links to specific sections
+3. Create a table of contents with internal navigation
+
+Try clicking any heading on this page - notice how the URL updates!
+
+## Enhanced Link Behavior
+
+All links in MDX articles get automatic enhancements:
+
+- **External links** automatically open in a new tab
+- **Security attributes** (`rel="noopener noreferrer"`) are added automatically
+- **Internal links** (same domain) behave normally
+- **Styled hover effects** from the global styles
+
+This is handled by the custom Link component in `/src/components/mdx/MDXComponents.tsx`.
+
+## Image Features
+
+Images are automatically enhanced with:
+
+1. **Lazy loading** - Images load as they enter the viewport (performance optimization)
+2. **Responsive sizing** - Max width of 100%, height auto-adjusts
+3. **Rounded corners** - Subtle border radius for better aesthetics
+4. **Alt text support** - Always include alt text for accessibility
+
+Example markup:
+```markdown
+![Descriptive alt text](https://example.com/image.jpg)
+```
+
+---
+
+# Best Practices
+
+## Writing Effective Articles
+
+### Structure Your Content
+
+- Use clear heading hierarchy (H1 → H2 → H3)
+- Break long sections into subsections
+- Include a summary or introduction
+- Use horizontal rules to separate major sections
+
+### Enhance Readability
+
+- Keep paragraphs focused and concise
+- Use lists for sequences or collections
+- Highlight important points with **bold** or callouts
+- Include code examples where relevant
+
+### Leverage MDX Features
+
+<Callout type="success">
+
+**Quick Tips:**
+
+- Use callouts for important information
+- Add charts to visualize data
+- Include math equations for technical content
+- Format code with proper syntax highlighting
+- Create tables for structured comparisons
+
+</Callout>
+
+## Chart Best Practices
+
+### Choose the Right Chart Type
+
+| Data Type | Recommended Chart | When to Use |
+|-----------|------------------|-------------|
+| **Categorical comparison** | Bar Chart | Compare values across categories |
+| **Trends over time** | Line Chart | Show changes and patterns |
+| **Cumulative data** | Area Chart | Emphasize total volume over time |
+| **Proportions** | Pie Chart | Show parts of a whole (5-7 slices max) |
+
+### Data Guidelines
+
+- **Keep datasets reasonable:** < 100 data points for line/area charts
+- **Limit pie slices:** 5-7 maximum for readability
+- **Use descriptive labels:** Clear axis titles and data point names
+- **Consider color cycling:** With 6+ series, colors will repeat
+- **Test both themes:** Verify charts look good in light and dark mode
+
+### Titles and Descriptions
+
+Always include:
+- **title:** Clear, descriptive chart title
+- **description:** Additional context about the data
+- **Axis labels:** Make sure data keys are meaningful
+
+Good example:
+```jsx
+<CustomLineChart
+  title="Monthly Revenue Growth"
+  description="Revenue trends for Q1 2026"
+  data={data}
+  xAxis="month"
+  yAxis="revenue"
+/>
+```
+
+## Math Equation Tips
+
+### Inline vs Block
+
+**Use inline math** for:
+- Short expressions in sentences
+- Variables and simple formulas
+- Mathematical notation in running text
+
+**Use block math** for:
+- Complex equations
+- Multiple related equations
+- Formulas that need emphasis
+
+### Testing Equations
+
+Test your LaTeX equations before publishing:
+
+1. Preview locally with `npm run dev`
+2. Check that symbols render correctly
+3. Verify spacing and alignment
+4. Test in both light and dark modes
+
+### Common KaTeX Syntax
+
+```latex
+Fractions: \frac{numerator}{denominator}
+Square root: \sqrt{x}
+Subscript: x_i
+Superscript: x^2
+Greek letters: \alpha, \beta, \gamma
+Summation: \sum_{i=1}^{n}
+Integral: \int_{a}^{b}
+Matrix: \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+```
+
+## Task Lists
+
+Use task lists for:
+- Action items and TODOs
+- Feature checklists
+- Step-by-step instructions
+- Progress tracking
+
+<Callout type="warning">
+Task lists are rendered statically in MDX. They won't be interactive checkboxes in the final output, but they provide clear visual indication of completion status.
+</Callout>
+
+## Accessibility
+
+Make your articles accessible:
+
+- **Alt text:** Always provide descriptive alt text for images
+- **Heading hierarchy:** Use proper H1 → H2 → H3 structure
+- **Link text:** Use descriptive link text, not "click here"
+- **Color contrast:** Charts automatically handle this with theme colors
+- **Code examples:** Include language identifiers for syntax highlighting
+
+---
+
+# Repository & Article Structure
+
+## Articles Repository Setup
+
+Your articles should be stored in a separate GitHub repository from your portfolio site. This separation provides:
+
+- **Clean separation of concerns**
+- **Independent version control for content**
+- **Easy content collaboration**
+- **Simplified deployment pipeline**
+
+### Repository Structure
+
+```
+articles/
+├── article-slug-1/
+│   ├── metadata.json
+│   └── index.mdx
+├── article-slug-2/
+│   ├── metadata.json
+│   └── index.mdx
+└── article-slug-3/
+    ├── metadata.json
+    └── index.mdx
+```
+
+Each article must have its own folder with two required files:
+
+1. **metadata.json** - Article metadata (title, summary, date, tags, authors)
+2. **index.mdx** - Article content with MDX formatting
+
+## Metadata Format
+
+The `metadata.json` file must follow this structure:
+
+```json
+{
+  "title": "Article Title",
+  "summary": "Brief description of the article for previews and SEO.",
+  "date": "YYYY-MM-DD",
+  "tags": ["tag1", "tag2", "tag3"],
+  "published": true,
+  "authors": [
+    {
+      "name": "Author Name",
+      "linkedIn": "https://www.linkedin.com/in/profile/"
+    }
+  ]
+}
+```
+
+<Callout type="warning">
+
+**Important Metadata Fields:**
+
+- **`published`**: (Optional) Set to `true` to publish the article. **Defaults to `false`** - articles are drafts by default and won't appear on the site until explicitly published. This allows you to work on articles in your repository without them going live immediately.
+
+- **`authors`**: The metadata uses an `authors` array, not a single `author` field. Each author object requires both `name` and `linkedIn` properties. This format supports multiple authors per article and provides linked author attribution.
+
+</Callout>
+
+## Article Content (index.mdx)
+
+Your `index.mdx` file contains the article content using MDX format. You can use:
+
+- All standard markdown syntax
+- GitHub Flavored Markdown (tables, task lists, strikethrough)
+- LaTeX math equations (inline and block)
+- Custom MDX components (charts, callouts)
+- Import statements (for any custom components)
+
+## How Articles Are Fetched
+
+Articles are fetched from GitHub using the GitHub API:
+
+1. **API Endpoint:** `https://api.github.com/repos/{owner}/{repo}/contents`
+2. **Authentication:** Requires GitHub Personal Access Token
+3. **Processing:** MDX content is compiled server-side with remark/rehype plugins
+4. **Caching:** Uses Incremental Static Regeneration (ISR)
+
+### ISR Caching Behavior
+
+- **Articles list:** Revalidates every 5 minutes
+- **Individual articles:** Revalidates every 5 minutes
+- **First load:** Always fetches fresh data
+- **Subsequent loads:** Serves cached data, revalidates in background
+
+<Callout type="info">
+After pushing a new article to GitHub, it may take up to 5 minutes to appear on your site due to ISR caching. You can trigger an immediate update by clearing the Next.js cache or redeploying.
+</Callout>
+
+## Environment Configuration
+
+Configure your articles repository in `.env.local`:
+
+```bash
+GITHUB_TOKEN=your_personal_access_token
+GITHUB_OWNER=your-github-username
+GITHUB_REPO=articles
+```
+
+The GitHub token needs `repo` scope to read repository contents.
+
+---
+
+# Creating Your First Article
+
+Ready to create your own article? Follow these steps:
+
+## Step 1: Create Article Folder
+
+```bash
+cd articles
+mkdir my-first-article
+cd my-first-article
+```
+
+## Step 2: Create metadata.json
+
+```json
+{
+  "title": "My First Article",
+  "summary": "Learning to create articles with MDX.",
+  "date": "2026-02-07",
+  "tags": ["tutorial", "getting-started"],
+  "published": true,
+  "authors": [
+    {
+      "name": "Your Name",
+      "linkedIn": "https://www.linkedin.com/in/your-profile/"
+    }
+  ]
+}
+```
+
+<Callout type="info">
+Set `"published": true` to make your article visible on the site. Omit this field or set it to `false` to keep it as a draft.
+</Callout>
+
+## Step 3: Create index.mdx
+
+```mdx
+# My First Article
+
+This is my first article using MDX!
+
+## A Simple Chart
+
+<CustomBarChart
+  title="My First Chart"
+  description="Example data visualization"
+  data={[
+    { category: "A", value: 100 },
+    { category: "B", value: 200 },
+    { category: "C", value: 150 }
+  ]}
+  xAxis="category"
+  yAxis="value"
+/>
+
+## A Callout
+
+<Callout type="success">
+I just created my first article!
+</Callout>
+```
+
+## Step 4: Commit and Push
+
+```bash
+git add .
+git commit -m "Add my first article"
+git push origin main
+```
+
+## Step 5: Wait for ISR Cache
+
+Wait up to 5 minutes, then check your portfolio site. Your article should appear in the articles list!
+
+<Callout type="success">
+Congratulations! You've created your first MDX article. Use this reference guide as a template for creating rich, interactive content.
+</Callout>
+
+---
+
+# Additional Resources
+
+## Related Files
+
+- **MDX Components:** `/src/components/mdx/MDXComponents.tsx`
+- **Article Fetching:** `/src/lib/github/articles.ts`
+- **Chart Components:** `/src/components/mdx/charts/`
+- **Theme Colors:** `/src/app/globals.css` (lines 72-76, 106-110)
+- **Type Definitions:** `/src/types/article.ts`
+
+## External Documentation
+
+- [MDX Documentation](https://mdxjs.com/)
+- [GitHub Flavored Markdown](https://github.github.com/gfm/)
+- [KaTeX Documentation](https://katex.org/)
+- [Recharts Documentation](https://recharts.org/)
+- [Next.js ISR](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)
+
+## Getting Help
+
+If you encounter issues:
+
+1. Check this reference guide for examples
+2. Verify your metadata.json format
+3. Ensure your GitHub token has correct permissions
+4. Check the browser console for errors
+5. Review the MDX compilation logs in your terminal
+
+<Callout type="info">
+This article serves as both documentation and a working example. You can copy the `mdx-reference` folder as a template for your own articles repository!
+</Callout>
+
+---
+
+**Last Updated:** February 7, 2026
+
+This reference article demonstrates all available MDX capabilities. Copy examples directly into your own articles, or use this entire folder as a template for setting up your articles repository.

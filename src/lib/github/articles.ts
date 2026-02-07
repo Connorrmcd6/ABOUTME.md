@@ -9,6 +9,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { notFound } from 'next/navigation';
 
 /**
  * Parse GitHub repo URL to extract owner and repo name
@@ -88,9 +89,10 @@ export async function getArticles(): Promise<ArticlePreview[]> {
             })
           );
 
-          // Filter out failed fetches and sort by date (newest first)
+          // Filter out failed fetches, unpublished articles, and sort by date (newest first)
           return articles
             .filter((article): article is ArticlePreview => article !== null)
+            .filter((article) => article.metadata.published === true)
             .sort((a, b) => new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime());
         } catch (error: any) {
           if (error.status === 404) {
@@ -148,6 +150,11 @@ export async function getArticle(slug: string): Promise<Article> {
       return withRetry(async () => {
         // Fetch metadata
         const metadata = await getArticleMetadata(owner, repo, slug);
+
+        // Check if article is published - trigger 404 if not
+        if (metadata.published !== true) {
+          notFound();
+        }
 
         // Fetch article content
         const { data } = await octokit.repos.getContent({

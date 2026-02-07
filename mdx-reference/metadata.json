@@ -1,0 +1,13 @@
+{
+  "title": "Complete MDX Reference Guide",
+  "summary": "A comprehensive demonstration of all MDX features available in this blog, including GitHub Flavored Markdown, math equations, interactive charts, callouts, and advanced formatting capabilities.",
+  "date": "2026-02-07",
+  "tags": ["mdx", "documentation", "reference", "charts", "markdown"],
+  "published": true,
+  "authors": [
+    {
+      "name": "Connor McDonald",
+      "linkedIn": "https://www.linkedin.com/in/connorrmcd6/"
+    }
+  ]
+}

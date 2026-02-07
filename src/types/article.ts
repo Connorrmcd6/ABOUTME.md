@@ -11,6 +11,7 @@ export interface ArticleMetadata {
   date: string;
   tags: string[];
   authors: Author[];
+  published?: boolean; // Optional: defaults to false. Set to true to publish the article
 }
 
 export interface Article {
