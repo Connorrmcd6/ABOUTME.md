@@ -14,7 +14,7 @@ interface RepoGridProps {
 export function RepoGrid({ repos }: RepoGridProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [languageFilter, setLanguageFilter] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'updated' | 'stars' | 'name'>('updated');
+  const [sortBy, setSortBy] = useState<'updated' | 'stars' | 'name'>('stars');
 
   // Get unique languages
   const languages = useMemo(() => {
@@ -28,6 +28,7 @@ export function RepoGrid({ repos }: RepoGridProps) {
   // Filter and sort repos
   const filteredRepos = useMemo(() => {
     let filtered = repos.filter((repo) => {
+      if (repo.archived) return false;
       const matchesSearch =
         repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         repo.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||

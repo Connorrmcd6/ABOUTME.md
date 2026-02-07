@@ -7,9 +7,9 @@ export const siteConfig = {
   ogImage: `${env.NEXT_PUBLIC_SITE_URL}/og-image.png`,
   links: {
     github: `https://github.com/${env.NEXT_PUBLIC_GITHUB_USERNAME}`,
-    linkedin: 'https://www.linkedin.com/in/connor-mcdonald-a770131a1/',
-    email: 'mailto:connormcd98@gmail.com', // TODO: Update with actual email
-    twitter: undefined as string | undefined, // TODO: Update with actual Twitter URL (optional)
+    linkedin: 'https://www.linkedin.com/in/your-linkedin-profile/',
+    email: 'mailto:your-email@example.com', // Update with actual email
+    twitter: undefined as string | undefined, // Update with actual Twitter URL (optional)
   },
 };
 

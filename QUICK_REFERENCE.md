@@ -30,13 +30,13 @@ REVALIDATION_TOKEN=secret      # Optional
 
 ## 📂 Files to Customize
 
-| File | What to Update |
-|------|---------------|
-| `src/config/site.ts` | Social links (LinkedIn, email, Twitter) |
-| `src/config/experience.ts` | Work experience entries |
-| `src/config/testimonials.ts` | Testimonials from colleagues |
-| `src/components/home/HeroSection.tsx` | Bio and profile info |
-| `public/profile.jpg` | Your profile picture (400x400px) |
+| File                                  | What to Update                          |
+| ------------------------------------- | --------------------------------------- |
+| `src/config/site.ts`                  | Social links (LinkedIn, email, Twitter) |
+| `src/config/experience.ts`            | Work experience entries                 |
+| `src/config/testimonials.ts`          | Testimonials from colleagues            |
+| `src/components/home/HeroSection.tsx` | Bio and profile info                    |
+| `public/profile.png`                  | Your profile picture (400x400px)        |
 
 ## 📁 Articles Repository Structure
 
@@ -66,6 +66,7 @@ articles/
 ```
 
 **Important:**
+
 - **`published`**: Set to `true` to publish (defaults to `false` - drafts by default)
 - **`authors`**: Array of objects, not single `author` field
 - Each author needs `name` and `linkedIn` properties
@@ -74,6 +75,7 @@ articles/
 ### index.mdx
 
 Your article content using MDX. Supports:
+
 - Full markdown (GitHub Flavored Markdown)
 - Math equations: `$E = mc^2$` or `$$...$$`
 - Charts: `<CustomBarChart>`, `<CustomLineChart>`, `<CustomAreaChart>`, `<CustomPieChart>`
@@ -102,48 +104,50 @@ npx shadcn@latest add badge
 
 ## 🔗 Important URLs
 
-| Path | Description |
-|------|-------------|
-| `/` | Home page with overview |
-| `/portfolio` | All repositories |
-| `/portfolio/[repo]` | Repository README |
-| `/articles` | All blog articles |
-| `/articles/[slug]` | Individual article |
-| `/api/revalidate?secret=XXX&path=/` | Manual revalidation |
+| Path                                | Description             |
+| ----------------------------------- | ----------------------- |
+| `/`                                 | Home page with overview |
+| `/portfolio`                        | All repositories        |
+| `/portfolio/[repo]`                 | Repository README       |
+| `/articles`                         | All blog articles       |
+| `/articles/[slug]`                  | Individual article      |
+| `/api/revalidate?secret=XXX&path=/` | Manual revalidation     |
 
 ## 🎨 Chart Theme Colors
 
 Customize in `src/app/globals.css`:
 
 **Light mode colors:** Lines 72-76
+
 ```css
---chart-1: oklch(0.646 0.222 41.116);   /* Warm orange */
---chart-2: oklch(0.6 0.118 184.704);     /* Cool cyan */
---chart-3: oklch(0.398 0.07 227.392);    /* Deep blue */
---chart-4: oklch(0.828 0.189 84.429);    /* Bright yellow */
---chart-5: oklch(0.769 0.188 70.08);     /* Light orange */
+--chart-1: oklch(0.646 0.222 41.116); /* Warm orange */
+--chart-2: oklch(0.6 0.118 184.704); /* Cool cyan */
+--chart-3: oklch(0.398 0.07 227.392); /* Deep blue */
+--chart-4: oklch(0.828 0.189 84.429); /* Bright yellow */
+--chart-5: oklch(0.769 0.188 70.08); /* Light orange */
 ```
 
 **Dark mode colors:** Lines 106-110
+
 ```css
---chart-1: oklch(0.488 0.243 264.376);   /* Purple */
---chart-2: oklch(0.696 0.17 162.48);     /* Teal/green */
---chart-3: oklch(0.769 0.188 70.08);     /* Orange */
---chart-4: oklch(0.627 0.265 303.9);     /* Magenta */
---chart-5: oklch(0.645 0.246 16.439);    /* Red-orange */
+--chart-1: oklch(0.488 0.243 264.376); /* Purple */
+--chart-2: oklch(0.696 0.17 162.48); /* Teal/green */
+--chart-3: oklch(0.769 0.188 70.08); /* Orange */
+--chart-4: oklch(0.627 0.265 303.9); /* Magenta */
+--chart-5: oklch(0.645 0.246 16.439); /* Red-orange */
 ```
 
 Charts automatically cycle through these 5 colors for multiple data series.
 
 ## 🐛 Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| "Invalid environment variables" | Create `.env.local` from `.env.local.example` |
-| Articles not showing | Check repo is public, structure is correct, wait 5 min |
-| Rate limit errors | Ensure `GITHUB_TOKEN` is set correctly |
-| Build fails | Check all env vars are set in Vercel/Docker |
-| MDX errors | Verify syntax, check `/mdx-reference/` for examples |
+| Issue                           | Solution                                               |
+| ------------------------------- | ------------------------------------------------------ |
+| "Invalid environment variables" | Create `.env.local` from `.env.local.example`          |
+| Articles not showing            | Check repo is public, structure is correct, wait 5 min |
+| Rate limit errors               | Ensure `GITHUB_TOKEN` is set correctly                 |
+| Build fails                     | Check all env vars are set in Vercel/Docker            |
+| MDX errors                      | Verify syntax, check `/mdx-reference/` for examples    |
 
 ## 📦 Project Structure
 
@@ -166,17 +170,20 @@ src/
 ## 🚢 Deployment Checklist
 
 ### Vercel
+
 - [ ] Push code to GitHub
 - [ ] Import project in Vercel
 - [ ] Add all environment variables
 - [ ] Deploy
 
 ### Docker
+
 - [ ] Create `.env` file with all variables
 - [ ] Build image: `docker build -f docker/Dockerfile.pi -t portfolio .`
 - [ ] Run container: `docker run -p 3000:3000 --env-file .env portfolio`
 
 ### Raspberry Pi
+
 - [ ] Install Docker
 - [ ] Clone repository
 - [ ] Create `.env` file

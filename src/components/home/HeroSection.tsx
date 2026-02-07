@@ -5,11 +5,11 @@ import { siteConfig } from '@/config/site';
 export function HeroSection() {
   // TODO: Update with actual profile information
   const profileName = siteConfig.name;
-  const currentRole = 'Data Engineer'; // TODO: Update with your current role
-  const currentCompany = 'Nansen.ai'; // TODO: Update with your current company
-  const companyFavicon = '/logos/nansen.png'; // TODO: Update with company logo path
+  const currentRole = 'Software Engineer'; // TODO: Update with your current role
+  const currentCompany = 'Google'; // TODO: Update with your current company
+  const companyFavicon = '/logos/google.png'; // TODO: Update with company logo path
   const profileBio = 'Full-stack developer passionate about building elegant solutions to complex problems. Specialized in modern web technologies and cloud architecture.';
-  const profileImageUrl = '/profile.jpg'; // TODO: Add actual profile image
+  const profileImageUrl = '/profile.png'; // TODO: Add actual profile image
 
   return (
     <section>
