@@ -8,7 +8,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15+-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue)](https://www.typescriptlang.org/)
 
-[Demo](#) · [Documentation](#documentation) · [Report Bug](../../issues) · [Request Feature](../../issues)
+[Documentation](#documentation) · [Report Bug](../../issues) · [Request Feature](../../issues)
 
 ---
 
@@ -47,6 +47,7 @@ Building a portfolio from scratch is time-consuming. ABOUTME.md gives you a prod
 **License:** MIT - Use it freely for personal or commercial purposes. No attribution required (but appreciated! ⭐).
 
 **What you'll do:**
+
 1. Fork this repository to your GitHub account
 2. Customize with your information and branding
 3. Create your articles repository
@@ -60,6 +61,7 @@ Follow the [Quick Start](#quick-start) guide below for step-by-step instructions
 Want to make ABOUTME.md better for everyone? We welcome contributions!
 
 **Perfect for:**
+
 - Reporting bugs
 - Suggesting features
 - Submitting improvements
@@ -74,10 +76,12 @@ See the [Contributing](#contributing) section for detailed guidelines.
 ### 1. Fork & Clone the Repository
 
 **Fork this repository:**
+
 1. Click the "Fork" button at the top right of this page
 2. This creates your own copy of ABOUTME.md
 
 **Clone your fork:**
+
 ```bash
 git clone https://github.com/YOUR_USERNAME/aboutme.md.git
 cd aboutme.md
@@ -133,6 +137,7 @@ Run the setup script to automatically create and configure your articles reposit
 ```
 
 This script will:
+
 - ✅ Create a new GitHub repository for your articles
 - ✅ Initialize it with a README and `.gitignore`
 - ✅ Copy the MDX reference template as your first article
@@ -140,6 +145,7 @@ This script will:
 - ✅ Update your `.env.local` automatically
 
 **Requirements:** GitHub CLI (`gh`) must be installed. Install it with:
+
 ```bash
 # macOS
 brew install gh
@@ -165,6 +171,7 @@ articles/
 ```
 
 **Important:** Each article requires:
+
 - A unique folder name (the article slug)
 - `metadata.json` with article metadata
 - `index.mdx` with article content
@@ -203,13 +210,14 @@ This is the content of my blog post written in **MDX**.
 - And much more!
 
 <Callout type="info">
-MDX allows you to use JSX components directly in your markdown!
+  MDX allows you to use JSX components directly in your markdown!
 </Callout>
 ```
 
 ### 5. Reference the MDX Capabilities
 
 Check the `/mdx-reference/` folder in this repository for a **complete example** of:
+
 - Correct article structure (metadata.json + index.mdx)
 - All available MDX features (markdown, math, charts, callouts)
 - Chart theming and customization
@@ -243,38 +251,44 @@ Once you have the basic setup running, customize it to make it yours! Here's a c
 ### ✅ Essential Customizations
 
 **1. Personal Information** (`src/config/site.ts`)
+
 ```typescript
 export const siteConfig = {
   links: {
-    github: 'https://github.com/YOUR_USERNAME',      // ← Update
-    linkedin: 'https://linkedin.com/in/YOUR_PROFILE', // ← Update
-    email: 'mailto:your.email@example.com',          // ← Update
-    twitter: 'https://twitter.com/YOUR_HANDLE',      // ← Update or remove
+    github: "https://github.com/YOUR_USERNAME", // ← Update
+    linkedin: "https://linkedin.com/in/YOUR_PROFILE", // ← Update
+    email: "mailto:your.email@example.com", // ← Update
+    twitter: "https://twitter.com/YOUR_HANDLE", // ← Update or remove
   },
 };
 ```
 
 **2. Work Experience** (`src/config/experience.ts`)
+
 - Replace example entries with your actual work history
 - Include job titles, companies, dates, and achievements
 - Add relevant technologies for each role
 
 **3. Testimonials** (`src/config/testimonials.ts`)
+
 - Add testimonials from colleagues or clients
 - Include their name, title, and company
 - Remove or comment out if you don't want this section
 
 **4. Hero Section** (`src/components/home/HeroSection.tsx`)
+
 - Update your bio (2-3 sentences about what you do)
 - Update your name
 - Change profile image path if needed
 
 **5. Profile Picture** (`public/`)
+
 - Add your profile picture as `public/profile.jpg` or `public/profile.png`
 - Recommended size: 400x400 pixels
 - Update the path in `HeroSection.tsx` if using different filename
 
 **6. Site Metadata** (`.env.local`)
+
 ```bash
 NEXT_PUBLIC_SITE_NAME=Your Full Name
 NEXT_PUBLIC_SITE_DESCRIPTION=Your professional tagline
@@ -284,26 +298,31 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com  # Update when deployed
 ### 🎯 Optional Customizations
 
 **7. Styling & Colors** (`src/app/globals.css`)
+
 - Customize theme colors (lines 8-20 for light mode, 40-52 for dark mode)
 - Adjust chart colors (lines 72-76 for light, 106-110 for dark)
 - Modify fonts, spacing, or other design tokens
 
 **8. Home Page Layout** (`src/app/page.tsx`)
+
 - Reorder sections
 - Remove sections you don't want (Portfolio, Articles, Experience, Testimonials)
 - Add custom sections
 
 **9. Navigation** (`src/components/layout/Header.tsx`)
+
 - Add or remove nav links
 - Update logo or branding
 - Customize mobile menu
 
 **10. Footer** (`src/components/layout/Footer.tsx`)
+
 - Update copyright information
 - Add/remove social links
 - Customize footer content
 
 **11. SEO & Meta Tags** (`src/app/layout.tsx`)
+
 - Update site title and description
 - Add Open Graph image
 - Customize meta tags for social sharing
@@ -311,6 +330,7 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com  # Update when deployed
 ### 🗑️ Removing Template Content
 
 **Remove example data:**
+
 ```bash
 # Clear example work experience
 # Edit: src/config/experience.ts → export const experience: ExperienceItem[] = [];
@@ -322,6 +342,7 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com  # Update when deployed
 ```
 
 **Remove features you don't need:**
+
 - Don't want a blog? Remove the Articles link from navigation
 - Don't want portfolio section? Remove from home page
 - Don't want testimonials? Remove the section and clear the config
@@ -329,6 +350,7 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com  # Update when deployed
 ### 🚀 Before Deploying
 
 **Final checklist:**
+
 - [ ] All personal information updated
 - [ ] Profile picture added
 - [ ] Work experience reflects your history
@@ -375,6 +397,7 @@ Your `metadata.json` must follow this structure:
 ```
 
 **Important fields:**
+
 - **`published`**: (Optional) Set to `true` to publish the article. **Defaults to `false`** - articles are drafts until explicitly published.
 - **`authors`**: An array of objects, not a single `author` string. This supports multiple authors per article.
 
@@ -383,15 +406,18 @@ Your `metadata.json` must follow this structure:
 Articles support rich MDX formatting:
 
 **GitHub Flavored Markdown:**
+
 - Tables, strikethrough, task lists
 - Code blocks with syntax highlighting
 - Headings with auto-generated anchor links
 
 **Mathematical Equations:**
+
 - Inline: `$E = mc^2$`
 - Block: `$$\int_{0}^{\infty} e^{-x^2} dx$$`
 
 **Custom Components:**
+
 - `<CustomBarChart>` - Bar charts
 - `<CustomLineChart>` - Line charts
 - `<CustomAreaChart>` - Area charts
@@ -399,6 +425,7 @@ Articles support rich MDX formatting:
 - `<Callout type="info|warning|error|success">` - Highlighted callout boxes
 
 **Enhanced Elements:**
+
 - **Images:** Lazy loading, responsive sizing, support for local assets
   - External URLs: `![Alt](https://example.com/image.png)`
   - Local images: `![Alt](./assets/image.png)` (stored in article's assets folder)
@@ -407,6 +434,7 @@ Articles support rich MDX formatting:
 
 **Images & Assets:**
 Store images in an `assets/` folder within your article directory:
+
 ```
 article-slug/
 ├── metadata.json
@@ -414,6 +442,7 @@ article-slug/
 └── assets/
     └── image.png
 ```
+
 Reference them in your MDX with relative paths: `![Description](./assets/image.png)`
 
 Relative paths are automatically transformed to GitHub raw URLs during compilation.
@@ -424,25 +453,25 @@ See `/mdx-reference/index.mdx` for comprehensive examples of all features!
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NEXT_PUBLIC_GITHUB_USERNAME` | Your GitHub username | Yes |
-| `GITHUB_TOKEN` | GitHub personal access token (needs `repo` scope) | Yes |
-| `ARTICLES_REPO_URL` | Full URL to your articles repository | Yes |
-| `NEXT_PUBLIC_SITE_URL` | Your site URL | Yes |
-| `NEXT_PUBLIC_SITE_NAME` | Your name | Yes |
-| `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description | Yes |
-| `REVALIDATION_TOKEN` | Secret token for manual revalidation API | No |
+| Variable                       | Description                                       | Required |
+| ------------------------------ | ------------------------------------------------- | -------- |
+| `NEXT_PUBLIC_GITHUB_USERNAME`  | Your GitHub username                              | Yes      |
+| `GITHUB_TOKEN`                 | GitHub personal access token (needs `repo` scope) | Yes      |
+| `ARTICLES_REPO_URL`            | Full URL to your articles repository              | Yes      |
+| `NEXT_PUBLIC_SITE_URL`         | Your site URL                                     | Yes      |
+| `NEXT_PUBLIC_SITE_NAME`        | Your name                                         | Yes      |
+| `NEXT_PUBLIC_SITE_DESCRIPTION` | Site description                                  | Yes      |
+| `REVALIDATION_TOKEN`           | Secret token for manual revalidation API          | No       |
 
 ### Personal Configuration Files
 
-| File | Purpose |
-|------|---------|
-| `src/config/site.ts` | Social media links and site metadata |
-| `src/config/experience.ts` | Work experience timeline |
-| `src/config/testimonials.ts` | Testimonials from colleagues |
-| `src/components/home/HeroSection.tsx` | Hero section with bio |
-| `public/profile.jpg` | Your profile picture (recommended: 400x400px) |
+| File                                  | Purpose                                       |
+| ------------------------------------- | --------------------------------------------- |
+| `src/config/site.ts`                  | Social media links and site metadata          |
+| `src/config/experience.ts`            | Work experience timeline                      |
+| `src/config/testimonials.ts`          | Testimonials from colleagues                  |
+| `src/components/home/HeroSection.tsx` | Hero section with bio                         |
+| `public/profile.jpg`                  | Your profile picture (recommended: 400x400px) |
 
 ## Deployment
 
@@ -515,6 +544,7 @@ When you push a new article to your GitHub repository, it will automatically app
 ### MDX Compilation
 
 Articles are fetched from GitHub and compiled server-side with:
+
 - `next-mdx-remote` - MDX compilation
 - `remark-gfm` - GitHub Flavored Markdown
 - `remark-math` + `rehype-katex` - Math equations
@@ -549,6 +579,7 @@ Customize colors in `src/app/globals.css`:
 ```
 
 **Chart theme colors** (5 colors that cycle automatically):
+
 - Light mode: Lines 72-76
 - Dark mode: Lines 106-110
 
@@ -678,6 +709,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
 #### Submitting Pull Requests
 
 1. **Fork the repository**
+
    ```bash
    # Click "Fork" on GitHub, then:
    git clone https://github.com/YOUR_USERNAME/portfolio-template.git
@@ -685,6 +717,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
    ```
 
 2. **Create a feature branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    # or
@@ -698,6 +731,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
    - Test your changes locally
 
 4. **Test thoroughly**
+
    ```bash
    npm run dev      # Test in development
    npm run build    # Test production build
@@ -705,6 +739,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
    ```
 
 5. **Commit with clear messages**
+
    ```bash
    git add .
    git commit -m "feat: add feature description"
@@ -734,6 +769,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
 #### Development Guidelines
 
 **Code Style:**
+
 - Use TypeScript for type safety
 - Follow existing file structure
 - Use functional components with hooks
@@ -741,11 +777,13 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
 - Add JSDoc comments for complex functions
 
 **Commit Guidelines:**
+
 - Keep commits atomic (one logical change per commit)
 - Write clear commit messages
 - Reference issue numbers when applicable
 
 **Testing:**
+
 - Test in both light and dark mode
 - Test responsive design (mobile, tablet, desktop)
 - Verify MDX compilation works
@@ -753,6 +791,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
 - Test with empty states (no articles, no repos)
 
 **Documentation:**
+
 - Update README.md for user-facing changes
 - Update QUICK_REFERENCE.md for command changes
 - Update `/mdx-reference/` for MDX feature changes
@@ -772,6 +811,7 @@ Found a bug or have a suggestion? Please [open an issue](../../issues) with:
 #### Questions?
 
 Not sure about something? Feel free to:
+
 - Open a discussion
 - Ask in your PR
 - Open an issue for clarification
@@ -783,6 +823,7 @@ Thank you for considering contributing! 🙏
 **ABOUTME.md** is released under the [MIT License](LICENSE).
 
 **What this means:**
+
 - ✅ Use it freely for personal or commercial projects
 - ✅ Modify it however you want
 - ✅ Distribute your modified versions
@@ -802,6 +843,7 @@ Thank you for considering contributing! 🙏
 ## Acknowledgments
 
 Built with these amazing open-source projects:
+
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
 - [shadcn/ui](https://ui.shadcn.com/) - UI component library
