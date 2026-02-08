@@ -14,7 +14,7 @@ interface CacheEntry<T> {
 
 class MemoryCache {
   private cache: Map<string, CacheEntry<any>> = new Map();
-  private defaultTTL = 5 * 60 * 1000; // 5 minutes
+  private defaultTTL = 30 * 60 * 1000; // 30 minutes
 
   get<T>(key: string, ttl?: number): T | null {
     const entry = this.cache.get(key);

@@ -111,7 +111,7 @@ export async function getArticles(): Promise<ArticlePreview[]> {
         }
       });
     },
-    5 * 60 * 1000 // 5 minutes TTL
+    30 * 60 * 1000 // 30 minutes TTL
   );
 }
 
@@ -188,7 +188,7 @@ export async function getArticle(slug: string): Promise<Article> {
         };
       });
     },
-    2 * 60 * 60 * 1000 // 2 hours TTL
+    30 * 60 * 1000 // 30 minutes TTL
   );
 }
 

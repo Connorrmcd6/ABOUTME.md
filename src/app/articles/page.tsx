@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: 'Read my thoughts on development, technology, and more',
 };
 
-// ISR: Revalidate every 5 minutes
-export const revalidate = 300;
+// ISR: Revalidate every 30 minutes
+export const revalidate = 1800;
 
 export default async function ArticlesPage() {
   const articles = await getArticles().catch((error) => {

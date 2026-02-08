@@ -13,7 +13,7 @@ interface ArticleListProps {
 
 export function ArticleList({ articles }: ArticleListProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
 
   // Get all unique tags
   const allTags = useMemo(() => {
@@ -24,6 +24,19 @@ export function ArticleList({ articles }: ArticleListProps) {
     return Array.from(tags).sort();
   }, [articles]);
 
+  // Toggle tag selection
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(tag)) {
+        newSet.delete(tag);
+      } else {
+        newSet.add(tag);
+      }
+      return newSet;
+    });
+  };
+
   // Filter articles
   const filteredArticles = useMemo(() => {
     return articles.filter((article) => {
@@ -32,11 +45,13 @@ export function ArticleList({ articles }: ArticleListProps) {
         article.metadata.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.metadata.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesTag = !selectedTag || article.metadata.tags.includes(selectedTag);
+      const matchesTag =
+        selectedTags.size === 0 ||
+        article.metadata.tags.some((tag) => selectedTags.has(tag));
 
       return matchesSearch && matchesTag;
     });
-  }, [articles, searchQuery, selectedTag]);
+  }, [articles, searchQuery, selectedTags]);
 
   return (
     <div className="space-y-6">
@@ -55,18 +70,18 @@ export function ArticleList({ articles }: ArticleListProps) {
       {allTags.length > 0 && (
         <div className="flex flex-wrap gap-2">
           <Badge
-            variant={selectedTag === null ? 'default' : 'outline'}
+            variant={selectedTags.size === 0 ? 'default' : 'outline'}
             className="cursor-pointer"
-            onClick={() => setSelectedTag(null)}
+            onClick={() => setSelectedTags(new Set())}
           >
             All
           </Badge>
           {allTags.map((tag) => (
             <Badge
               key={tag}
-              variant={selectedTag === tag ? 'default' : 'outline'}
+              variant={selectedTags.has(tag) ? 'default' : 'outline'}
               className="cursor-pointer"
-              onClick={() => setSelectedTag(tag)}
+              onClick={() => toggleTag(tag)}
             >
               {tag}
             </Badge>

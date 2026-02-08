@@ -3,7 +3,7 @@ export interface Testimonial {
   author: string;
   title: string;
   company?: string;
-  avatarUrl?: string;
+  profileUrl?: string;
 }
 
 export const testimonials: Testimonial[] = [

@@ -20,7 +20,7 @@ export async function getPublicRepos(username: string = env.NEXT_PUBLIC_GITHUB_U
         return data.filter((repo: any) => !repo.archived && !repo.fork && !repo.private) as Repository[];
       });
     },
-    10 * 60 * 1000 // 10 minutes TTL
+    30 * 60 * 1000 // 30 minutes TTL
   );
 }
 
@@ -40,7 +40,7 @@ export async function getRepo(owner: string, repo: string): Promise<Repository> 
         return data as Repository;
       });
     },
-    1 * 60 * 60 * 1000 // 1 hour TTL
+    30 * 60 * 1000 // 30 minutes TTL
   );
 }
 
@@ -69,7 +69,7 @@ export async function getRepoReadme(owner: string, repo: string): Promise<string
         }
       });
     },
-    1 * 60 * 60 * 1000 // 1 hour TTL
+    30 * 60 * 1000 // 30 minutes TTL
   );
 }
 

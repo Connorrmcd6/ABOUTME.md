@@ -8,7 +8,15 @@ export function Footer() {
     <footer className="border-t py-6 md:py-8">
       <div className="max-w-[740px] mx-auto px-5 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-sm text-muted-foreground">
-          © {currentYear} {siteConfig.name}
+          Made with{' '}
+          <a
+            href="https://github.com/Connorrmcd6/ABOUTME.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors underline decoration-dotted"
+          >
+            ABOUTME.md
+          </a>
         </p>
         <div className="flex items-center gap-4 text-sm">
           <a

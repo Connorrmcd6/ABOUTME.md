@@ -17,4 +17,5 @@ export const navItems = [
   { name: 'Home', href: '/' },
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Articles', href: '/articles' },
+  { name: 'Contact', href: '/contact' }
 ];

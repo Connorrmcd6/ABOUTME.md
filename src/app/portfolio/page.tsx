@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: 'Browse my open source projects and repositories',
 };
 
-// ISR: Revalidate every 10 minutes
-export const revalidate = 600;
+// ISR: Revalidate every 30 minutes
+export const revalidate = 1800;
 
 export default async function PortfolioPage() {
   const repos = await getPublicRepos().catch((error) => {

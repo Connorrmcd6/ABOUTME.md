@@ -5,6 +5,29 @@ import { Button } from '@/components/ui/button';
 import { Star, GitFork, ExternalLink } from 'lucide-react';
 import type { Repository } from '@/types/repository';
 
+const languageColors: Record<string, string> = {
+  TypeScript: '#3178c6',
+  JavaScript: '#f1e05a',
+  Python: '#3572A5',
+  Java: '#b07219',
+  Go: '#00ADD8',
+  Rust: '#dea584',
+  Ruby: '#701516',
+  PHP: '#4F5D95',
+  C: '#555555',
+  'C++': '#f34b7d',
+  'C#': '#178600',
+  Swift: '#ffac45',
+  Kotlin: '#A97BFF',
+  Dart: '#00B4AB',
+  Shell: '#89e051',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  SCSS: '#c6538c',
+  Vue: '#41b883',
+  MDX: '#fcb32c',
+};
+
 interface ReposPreviewProps {
   repos: Repository[];
 }
@@ -13,70 +36,77 @@ export function ReposPreview({ repos }: ReposPreviewProps) {
   return (
     <section>
       <div className="flex items-center justify-between mb-8">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">Featured Projects</h2>
-          <p className="text-muted-foreground mt-2">
-            Check out some of my recent work
-          </p>
-        </div>
-        <Button variant="outline" asChild>
-          <Link href="/portfolio">
-            View All
-            <ExternalLink className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+        <h2 className="text-2xl font-bold tracking-tight">Featured Projects</h2>
+        <Link
+          href="/articles"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          View all →
+        </Link>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        {repos.map((repo) => (
-          <Card key={repo.id} className="flex flex-col">
-            <CardHeader>
-              <CardTitle className="flex items-start justify-between">
-                <Link
-                  href={`/portfolio/${repo.name}`}
-                  className="hover:underline line-clamp-1"
-                >
-                  {repo.name}
-                </Link>
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-2 text-muted-foreground hover:text-foreground"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </CardTitle>
-              <CardDescription className="line-clamp-2">
-                {repo.description || 'No description provided'}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col justify-between">
-              <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4" />
-                  <span>{repo.stargazers_count}</span>
+        {repos.map((repo) => {
+          const languageColor = repo.language ? languageColors[repo.language] || '#8b949e' : '#8b949e';
+
+          return (
+            <Card key={repo.id} className="flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+              <CardHeader className="space-y-3">
+                <CardTitle className="text-lg flex items-start justify-between gap-2">
+                  <Link
+                    href={`/portfolio/${repo.name}`}
+                    className="hover:underline line-clamp-2"
+                  >
+                    {repo.name}
+                  </Link>
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground shrink-0 mt-0.5"
+                    aria-label="View on GitHub"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </CardTitle>
+                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Star className="h-3 w-3" />
+                    <span>{repo.stargazers_count}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitFork className="h-3 w-3" />
+                    <span>{repo.forks_count}</span>
+                  </div>
+                  {repo.language && (
+                    <div className="flex items-center gap-1.5">
+                      <div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: languageColor }}
+                        aria-hidden="true"
+                      />
+                      <span>{repo.language}</span>
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center gap-1">
-                  <GitFork className="h-4 w-4" />
-                  <span>{repo.forks_count}</span>
-                </div>
-                {repo.language && (
-                  <Badge variant="secondary">{repo.language}</Badge>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-between gap-3">
+                <p className="text-sm text-muted-foreground line-clamp-3">
+                  {repo.description || 'No description provided'}
+                </p>
+                {repo.topics.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {repo.topics.slice(0, 3).map((topic) => (
+                      <Badge key={topic} variant="secondary" className="text-xs px-2 py-0">
+                        {topic}
+                      </Badge>
+                    ))}
+                  </div>
                 )}
-              </div>
-              {repo.topics.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {repo.topics.slice(0, 3).map((topic) => (
-                    <Badge key={topic} variant="outline">
-                      {topic}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </section>
   );

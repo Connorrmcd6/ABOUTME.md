@@ -12,39 +12,41 @@ export function HeroSection() {
   const profileImageUrl = '/profile.png'; // TODO: Add actual profile image
 
   return (
-    <section>
-      <div className="flex items-start gap-8 md:gap-12">
+    <section className="pb-8 border-b">
+      <div className="flex items-start gap-6 md:gap-8">
         {/* Left Column - Text */}
-        <div className="flex-1 space-y-3">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-            {profileName}
-          </h1>
+        <div className="flex-1 space-y-4">
+          <div className="space-y-2">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+              {profileName}
+            </h1>
 
-          {/* Current Role */}
-          <div className="flex items-center gap-2 text-sm md:text-base text-muted-foreground">
-            {companyFavicon && (
-              <div className="relative w-4 h-4 flex-shrink-0">
-                <Image
-                  src={companyFavicon}
-                  alt={currentCompany}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            )}
-            <span>{currentRole} @ {currentCompany}</span>
+            {/* Current Role */}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              {companyFavicon && (
+                <div className="relative w-3.5 h-3.5 flex-shrink-0">
+                  <Image
+                    src={companyFavicon}
+                    alt={currentCompany}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              )}
+              <span>{currentRole} at {currentCompany}</span>
+            </div>
           </div>
 
-          <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
             {profileBio}
           </p>
         </div>
 
         {/* Right Column - Profile Picture */}
         <div className="flex-shrink-0">
-          <Avatar className="h-24 w-24 md:h-32 md:w-32">
+          <Avatar className="h-24 w-24 md:h-28 md:w-28">
             <AvatarImage src={profileImageUrl} alt={profileName} />
-            <AvatarFallback className="text-2xl md:text-4xl">
+            <AvatarFallback className="text-2xl md:text-3xl">
               {profileName.split(' ').map(n => n[0]).join('')}
             </AvatarFallback>
           </Avatar>

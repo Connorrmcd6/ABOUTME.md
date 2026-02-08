@@ -19,10 +19,13 @@ export function ArticlesPreview({ articles }: ArticlesPreviewProps) {
         </Link>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-2">
         {articles.map((article) => (
           <article key={article.slug} className="group">
-            <Link href={`/articles/${article.slug}`} className="block">
+            <Link
+              href={`/articles/${article.slug}`}
+              className="block p-4 -mx-4 rounded-lg hover:bg-muted/50 transition-colors"
+            >
               <div className="flex items-baseline justify-between gap-4 mb-1">
                 <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
                   {article.metadata.title}
