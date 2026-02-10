@@ -32,12 +32,15 @@ The modular architecture gives you complete control: enable what matters, disabl
 
 ## Quick Start
 
-### 1. Fork & Clone
+### 1. Use This Template
+
+Click the green **"Use this template"** button at the top of this repo and select **"Create a new repository"**. This gives you a clean copy with no fork link—and you can make it private from the start.
+
+> **Only fork or clone directly if you want to [contribute](#contributing) back to this template.** For personal use, always use the template button.
 
 ```bash
-# Fork this repo on GitHub, then:
-git clone https://github.com/YOUR_USERNAME/aboutme.md.git
-cd aboutme.md
+git clone https://github.com/YOUR_USERNAME/your-repo-name.git
+cd your-repo-name
 npm install
 ```
 
@@ -233,9 +236,9 @@ Next.js 15 · TypeScript · Tailwind CSS · shadcn/ui · MDX · Recharts · KaTe
 
 ## Contributing
 
-**This template is designed to be forked and customized.** You don't need to contribute back—make it your own!
+**This template is designed to be used via the "Use this template" button.** You don't need to contribute back—make it your own!
 
-**But if you'd like to improve the template for everyone:**
+**Only fork/clone this repo directly if you'd like to improve the template for everyone:**
 
 ### We Welcome
 
