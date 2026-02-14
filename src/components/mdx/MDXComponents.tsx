@@ -2,6 +2,7 @@
 
 import type { MDXComponents } from 'mdx/types';
 import dynamic from 'next/dynamic';
+import { markdownComponents } from '../markdown/MarkdownElements';
 
 // Dynamically import wrapper components to ensure client-side only rendering
 const CustomBarChart = dynamic(() => import('./charts/BarChart').then(mod => ({ default: mod.BarChart })), {
@@ -36,32 +37,15 @@ if (typeof window !== 'undefined') {
 
 export function getMDXComponents(): MDXComponents {
   const components: MDXComponents = {
+    // Shared markdown element styling
+    ...markdownComponents,
+
     // Custom wrapper components (use these for simple charts)
     CustomBarChart,
     CustomLineChart,
     CustomAreaChart,
     CustomPieChart,
     Callout,
-
-    // Override default elements
-    a: (props: any) => {
-      const isExternal = props.href?.startsWith('http');
-      return (
-        <a
-          {...props}
-          target={isExternal ? '_blank' : undefined}
-          rel={isExternal ? 'noopener noreferrer' : undefined}
-        />
-      );
-    },
-
-    img: (props: any) => (
-      <img
-        {...props}
-        className="rounded-lg max-w-full h-auto"
-        loading="lazy"
-      />
-    ),
   };
 
   // Add raw recharts components only on client side

@@ -4,8 +4,6 @@
 @import "highlight.js/styles/github.css" (prefers-color-scheme: light);
 @import "highlight.js/styles/github-dark.css" (prefers-color-scheme: dark);
 
-@plugin "@tailwindcss/typography";
-
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme inline {
@@ -131,82 +129,10 @@
   }
 }
 
-/* MDX Prose Styling */
-.prose-content {
-  @apply prose prose-slate dark:prose-invert max-w-none;
-}
-
-.prose-content h1 {
-  @apply text-4xl font-bold mt-8 mb-4;
-}
-
-.prose-content h2 {
-  @apply text-3xl font-bold mt-8 mb-4;
-}
-
-.prose-content h3 {
-  @apply text-2xl font-semibold mt-6 mb-3;
-}
-
-.prose-content h4 {
-  @apply text-xl font-semibold mt-4 mb-2;
-}
-
-.prose-content p {
-  @apply my-4 leading-relaxed;
-}
-
-.prose-content ul,
-.prose-content ol {
-  @apply my-4 ml-6;
-}
-
-.prose-content li {
-  @apply my-2;
-}
-
-.prose-content code {
-  @apply px-1.5 py-0.5 rounded bg-muted text-sm font-mono;
-}
-
-.prose-content pre {
-  @apply my-4 p-4 rounded-lg bg-muted overflow-x-auto;
-}
-
-.prose-content pre code {
-  @apply p-0 bg-transparent;
-  color: var(--foreground) !important;
-}
-
-.prose-content blockquote {
-  @apply border-l-4 border-primary pl-4 italic my-4;
-}
-
-.prose-content a {
-  @apply text-primary hover:underline;
-}
-
-.prose-content strong {
-  @apply font-bold;
-}
-
-.prose-content em {
-  @apply italic;
-}
-
 .hljs {
   background: transparent !important;
 }
 
 pre code.hljs {
   padding: 0;
-}
-
-.prose pre {
-  background-color: var(--muted) !important;
-}
-
-.prose pre code {
-  background-color: transparent !important;
-  color: var(--foreground) !important;
 }

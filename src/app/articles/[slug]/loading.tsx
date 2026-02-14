@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function ArticleLoading() {
   return (
     <div className="max-w-[740px] mx-auto px-5 md:px-8 py-8">
-      <article className="prose prose-gray dark:prose-invert max-w-none">
+      <article className="max-w-none">
         {/* Article header */}
         <div className="mb-8 space-y-4">
           <Skeleton className="h-12 w-3/4" />

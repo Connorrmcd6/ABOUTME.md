@@ -6,6 +6,7 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { markdownComponents } from './MarkdownElements';
 
 interface MarkdownRendererProps {
   content: string;
@@ -17,7 +18,7 @@ interface MarkdownRendererProps {
  */
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="prose prose-slate dark:prose-invert max-w-none">
+    <div className="max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[
@@ -26,25 +27,7 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: 'wrap' }],
         ]}
-        components={{
-          a: ({ node, ...props }) => {
-            const isExternal = props.href?.startsWith('http');
-            return (
-              <a
-                {...props}
-                target={isExternal ? '_blank' : undefined}
-                rel={isExternal ? 'noopener noreferrer' : undefined}
-              />
-            );
-          },
-          img: ({ node, ...props }) => (
-            <img
-              {...props}
-              className="rounded-lg max-w-full h-auto"
-              loading="lazy"
-            />
-          ),
-        }}
+        components={markdownComponents}
       >
         {content}
       </ReactMarkdown>

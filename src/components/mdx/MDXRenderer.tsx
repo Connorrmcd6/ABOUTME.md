@@ -12,7 +12,7 @@ export function MDXRenderer({ source }: MDXRendererProps) {
   const components = getMDXComponents();
 
   return (
-    <div className="prose prose-slate dark:prose-invert max-w-none">
+    <div className="max-w-none">
       <MDXRemote {...source} components={components} />
     </div>
   );

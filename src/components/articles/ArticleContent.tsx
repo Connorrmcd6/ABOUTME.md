@@ -9,7 +9,7 @@ const MDXRenderer = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="prose-content">
+      <div>
         <div className="flex items-center justify-center p-8">
           <div className="animate-pulse text-muted-foreground">Loading article content...</div>
         </div>
@@ -24,7 +24,7 @@ interface ArticleContentProps {
 
 export function ArticleContent({ mdxSource }: ArticleContentProps) {
   return (
-    <div className="prose-content">
+    <div>
       <MDXRenderer source={mdxSource} />
     </div>
   );
