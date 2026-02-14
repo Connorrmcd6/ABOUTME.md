@@ -6,13 +6,17 @@ import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans-var",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-mono-var",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

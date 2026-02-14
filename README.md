@@ -133,14 +133,81 @@ Edit these config files:
 
 ### Styling
 
-Customize colors in `src/app/globals.css`:
+#### Color Theme
+
+This template uses [shadcn/ui](https://ui.shadcn.com/themes) theming. To change your color palette:
+
+1. Go to [ui.shadcn.com/themes](https://ui.shadcn.com/themes)
+2. Pick a theme (e.g. Blue, Green, Orange) and select **Copy code** with the `oklch` format
+3. Replace the `:root` and dark mode CSS variables in `src/app/globals.css`
+
+For example, applying the **Blue** theme:
 
 ```css
 :root {
-  --primary: 220 90% 56%;    /* Your brand color */
-  --chart-1: oklch(...);      /* Chart colors */
+  --radius: 0.65rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.141 0.005 285.823);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.97 0.014 254.604);
+  /* ... paste the rest of the variables from shadcn */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.141 0.005 285.823);
+    --foreground: oklch(0.985 0 0);
+    --primary: oklch(0.488 0.243 264.376);
+    /* ... dark mode variables */
+  }
 }
 ```
+
+> **Note:** Only replace the `:root { ... }` and `@media (prefers-color-scheme: dark) { :root { ... } }` blocks. Leave the `@theme inline`, `@layer base`, and other sections untouched.
+
+#### Custom Fonts
+
+The default font is [Geist](https://vercel.com/font). You can swap it with any Google Font or your own local font files.
+
+**Option A: Google Fonts (free)**
+
+Edit `src/app/layout.tsx`:
+
+```typescript
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  variable: "--font-sans-var",  // Reuse the same CSS variable
+  subsets: ["latin"],
+});
+
+// In the <body> tag:
+<body className={`${inter.variable} antialiased`}>
+```
+
+You can use any font from [fonts.google.com](https://fonts.google.com). Just replace `Inter` with your chosen font's import name (e.g. `Roboto`, `Outfit`, `Space_Grotesk`).
+
+**Option B: Local font files (purchased/custom)**
+
+Place your font files in `src/app/fonts/` and use `next/font/local`:
+
+```typescript
+import localFont from "next/font/local";
+
+const myFont = localFont({
+  src: [
+    { path: "./fonts/MyFont-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/MyFont-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/MyFont-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-sans-var",
+});
+
+// In the <body> tag:
+<body className={`${myFont.variable} antialiased`}>
+```
+
+> **Tip:** The `--font-sans-var` CSS variable is what the entire site reads from, so swapping the font source in `layout.tsx` is the only change needed.
 
 ---
 
@@ -265,9 +332,11 @@ Next.js 15 · TypeScript · Tailwind CSS · shadcn/ui · MDX · Recharts · KaTe
 
 [Open an issue](../../issues) to discuss ideas or report bugs.
 
-## License
+## License & Attribution
 
-MIT License - use freely for personal or commercial projects. No attribution required (but a star is appreciated! ⭐).
+MIT License - use freely for personal or commercial projects.
+
+The contact page includes a small "Made with ABOUTME.md" attribution. You're free to remove it — no hard feelings. If you enjoy the template, a [star on GitHub](https://github.com/Connorrmcd6/ABOUTME.md/stargazers) goes a long way in helping others discover it.
 
 ---
 

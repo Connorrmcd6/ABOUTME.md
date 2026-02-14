@@ -5,16 +5,16 @@ type El<T extends keyof React.JSX.IntrinsicElements> = ComponentPropsWithoutRef<
 
 export const markdownComponents = {
   h1: ({ className, ...props }: El<'h1'>) => (
-    <h1 className={cn('text-4xl font-bold mt-8 mb-4', className)} {...props} />
+    <h1 className={cn('text-4xl font-bold mt-8 mb-4 [&>a]:text-inherit', className)} {...props} />
   ),
   h2: ({ className, ...props }: El<'h2'>) => (
-    <h2 className={cn('text-3xl font-bold mt-8 mb-4', className)} {...props} />
+    <h2 className={cn('text-3xl font-bold mt-8 mb-4 [&>a]:text-inherit', className)} {...props} />
   ),
   h3: ({ className, ...props }: El<'h3'>) => (
-    <h3 className={cn('text-2xl font-semibold mt-6 mb-3', className)} {...props} />
+    <h3 className={cn('text-2xl font-semibold mt-6 mb-3 [&>a]:text-inherit', className)} {...props} />
   ),
   h4: ({ className, ...props }: El<'h4'>) => (
-    <h4 className={cn('text-xl font-semibold mt-4 mb-2', className)} {...props} />
+    <h4 className={cn('text-xl font-semibold mt-4 mb-2 [&>a]:text-inherit', className)} {...props} />
   ),
   p: ({ className, ...props }: El<'p'>) => (
     <p className={cn('my-4 leading-relaxed', className)} {...props} />

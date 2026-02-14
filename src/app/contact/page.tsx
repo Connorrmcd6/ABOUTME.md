@@ -65,7 +65,7 @@ export default function ContactPage() {
       </div>
 
       {/* Attribution */}
-      <div className="mt-12 pt-6 border-t">
+      <div className="mt-12 pt-6 border-t space-y-1">
         <p className="text-sm text-muted-foreground text-center">
           Made with{' '}
           <a
@@ -76,6 +76,18 @@ export default function ContactPage() {
           >
             ABOUTME.md
           </a>
+        </p>
+        <p className="text-xs text-muted-foreground/60 text-center">
+          Enjoying it?{' '}
+          <a
+            href='https://www.linkedin.com/in/connor-mcdonald-a770131a1/'
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors underline decoration-dotted"
+          >
+            Tag me on LinkedIn
+          </a>
+          {' '}with your portfolio!
         </p>
       </div>
     </div>
