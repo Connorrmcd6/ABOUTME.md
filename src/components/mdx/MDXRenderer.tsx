@@ -2,7 +2,6 @@
 
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { getMDXComponents } from './MDXComponents';
-import 'highlight.js/styles/github-dark.css';
 import 'katex/dist/katex.min.css';
 
 interface MDXRendererProps {
