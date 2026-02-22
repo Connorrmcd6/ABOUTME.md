@@ -98,21 +98,26 @@ export const homeConfig = {
   repos: { enabled: true },
   articles: { enabled: true, count: 3 },
   experience: { enabled: true },
-  education: { enabled: false },      // Disable sections you don't need
+  education: { enabled: false }, // Disable sections you don't need
   certifications: { enabled: false },
   talks: { enabled: false },
   now: { enabled: true },
   testimonials: { enabled: false },
   connect: { enabled: true },
-}
+};
 
 // Reorder sections by changing array order
 export const sectionOrder = [
-  'repos', 'articles', 'experience', 'now', 'connect'
-]
+  "repos",
+  "articles",
+  "experience",
+  "now",
+  "connect",
+];
 ```
 
 **Available sections:**
+
 - All components in `src/components/home/`
 - Each has its own config file (e.g., `src/config/experience.ts`, `src/config/testimonials.ts`)
 - Add custom sections by creating new components and config files
@@ -122,6 +127,7 @@ export const sectionOrder = [
 ### Personal Information
 
 Edit these config files:
+
 - `src/config/site.ts` - Social links, site metadata
 - `src/config/experience.ts` - Work history
 - `src/config/education.ts` - Education background
@@ -135,7 +141,11 @@ Edit these config files:
 
 #### Color Theme
 
-This template uses [shadcn/ui](https://ui.shadcn.com/themes) theming. To change your color palette:
+This template uses [shadcn/ui](https://ui.shadcn.com/themes) theming.
+
+**Recommended:** Use [TweakCN Theme Editor](https://tweakcn.com/editor/theme) to generate custom themes visually, then copy the generated CSS variables into `src/app/globals.css`.
+
+To customize manually:
 
 1. Go to [ui.shadcn.com/themes](https://ui.shadcn.com/themes)
 2. Pick a theme (e.g. Blue, Green, Orange) and select **Copy code** with the `oklch` format
@@ -224,6 +234,7 @@ articles/
 ```
 
 **metadata.json:**
+
 ```json
 {
   "title": "Article Title",
@@ -264,6 +275,7 @@ docker run -p 3000:3000 --env-file .env portfolio
 ```
 
 Or with Docker Compose:
+
 ```bash
 cd docker && docker-compose up -d
 ```
@@ -271,6 +283,7 @@ cd docker && docker-compose up -d
 ## How It Works
 
 **Incremental Static Regeneration (ISR)** automatically updates content from GitHub:
+
 - Articles sync every 5 minutes
 - Repos sync every 10 minutes
 - Graceful fallbacks if GitHub API is unavailable
@@ -325,6 +338,7 @@ Next.js 15 · TypeScript · Tailwind CSS · shadcn/ui · MDX · Recharts · KaTe
 6. Push and open a PR
 
 **Focus areas:**
+
 - New home page sections that others would find useful
 - Easier configuration patterns
 - Better defaults and examples
@@ -343,4 +357,3 @@ The contact page includes a small "Made with ABOUTME.md" attribution. You're fre
 **Questions?** [Open an issue](../../issues) · **Need inspiration?** Check `/mdx-reference/` for examples
 
 Built with Next.js, Tailwind CSS, shadcn/ui, MDX, and Recharts.
-
